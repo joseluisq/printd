@@ -1,0 +1,97 @@
+{
+  "name": "printd",
+  "version": "0.0.0",
+  "description": "Print HTML elements in modern browsers.",
+  "repository": "joseluisq/printd",
+  "license": "MIT",
+  "author": {
+    "name": "José Luis Quintana",
+    "url": "http://git.io/joseluisq"
+  },
+  "keywords": [
+    "print",
+    "element printing"
+  ],
+  "engines": {
+    "node": ">= 4"
+  },
+  "main": "dist/printd.js",
+  "scripts": {
+    "version": "npm run build",
+    "build": "npm run clean && npm run js",
+    "js": "npm run js:min && npm run js:unmin",
+    "js:min": "cross-env NODE_ENV=minified rollup -c",
+    "js:unmin": "cross-env NODE_ENV=unminified rollup -c",
+    "lint": "eslint index.js",
+    "clean": "rm -rf .nyc_output && rm -rf coverage && rm -rf dist",
+    "test": "npm run clean && npm run lint && npm run test:ava",
+    "test:ava": "cross-env NODE_ENV=testing nyc ava --verbose",
+    "test:watch": "ava --verbose --watch",
+    "coverage": "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
+  },
+  "devDependencies": {
+    "ava": "^0.20.0",
+    "babel-core": "^6.25.0",
+    "babel-eslint": "^7.2.3",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "babel-register": "^6.24.1",
+    "coveralls": "^2.13.1",
+    "cross-env": "^5.0.1",
+    "eslint": "^4.1.1",
+    "eslint-config-standard": "^10.2.1",
+    "eslint-plugin-import": "^2.6.1",
+    "eslint-plugin-node": "^5.1.0",
+    "eslint-plugin-promise": "^3.5.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "nyc": "^11.0.3",
+    "object-assign": "^4.1.1",
+    "rollup": "^0.43.0",
+    "rollup-plugin-buble": "^0.15.0",
+    "rollup-plugin-commonjs": "^8.0.2",
+    "rollup-plugin-inject": "^2.0.0",
+    "rollup-plugin-node-resolve": "^3.0.0",
+    "rollup-plugin-uglify": "^2.0.1"
+  },
+  "babel": {
+    "presets": [
+      "es2015",
+      "stage-0"
+    ],
+    "env": {
+      "testing": {
+        "presets": [
+          "es2015",
+          "stage-0"
+        ],
+        "ignore": "test.js",
+        "sourceMaps": "inline"
+      }
+    }
+  },
+  "eslintConfig": {
+    "parser": "babel-eslint",
+    "extends": [
+      "standard"
+    ]
+  },
+  "standard": {
+    "parser": "babel-eslint"
+  },
+  "ava": {
+    "require": [
+      "babel-core/register"
+    ]
+  },
+  "nyc": {
+    "require": [
+      "babel-register"
+    ],
+    "checkCoverage": true,
+    "reporter": [
+      "text",
+      "lcov"
+    ]
+  }
+}
