@@ -1,6 +1,6 @@
 {
   "name": "printd",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Print HTML elements in modern browsers.",
   "repository": "joseluisq/printd",
   "license": "MIT",
@@ -21,6 +21,7 @@
     "build": "node node_modules/typescript/lib/tsc.js --module umd && uglifyjs dist/index.js -cm --source-map -o dist/${npm_package_name}.min.js",
     "watch": "node node_modules/typescript/lib/tsc.js --watch",
     "clean": "node bin/clean.js",
+    "test": "echo \"Error: no test specified\" && exit",
     "lint": "node node_modules/tslint/bin/tslint --format stylish --project tsconfig.json --type-check"
   },
   "devDependencies": {
