@@ -15,83 +15,32 @@
   "engines": {
     "node": ">= 4"
   },
-  "main": "dist/printd.js",
+  "main": "dist/index.js",
   "scripts": {
-    "version": "npm run build",
-    "build": "npm run clean && npm run js",
-    "js": "npm run js:min && npm run js:unmin",
-    "js:min": "cross-env NODE_ENV=minified rollup -c",
-    "js:unmin": "cross-env NODE_ENV=unminified rollup -c",
-    "lint": "eslint index.js",
-    "clean": "rm -rf .nyc_output && rm -rf coverage && rm -rf dist",
-    "test": "npm run clean && npm run lint && npm run test:ava",
-    "test:ava": "cross-env NODE_ENV=testing nyc ava --verbose",
-    "test:watch": "ava --verbose --watch",
-    "coverage": "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
+    "start": "webpack-dev-server --config webpack.config.js",
+    "build": "node node_modules/typescript/lib/tsc.js --module umd && uglifyjs dist/index.js -cm --source-map -o dist/${npm_package_name}.min.js",
+    "watch": "node node_modules/typescript/lib/tsc.js --watch",
+    "clean": "node bin/clean.js",
+    "lint": "node node_modules/tslint/bin/tslint --format stylish --project tsconfig.json --type-check"
   },
   "devDependencies": {
-    "ava": "^0.20.0",
-    "babel-core": "^6.25.0",
-    "babel-eslint": "^7.2.3",
-    "babel-plugin-transform-runtime": "^6.23.0",
-    "babel-preset-es2015": "^6.24.1",
-    "babel-preset-stage-0": "^6.24.1",
-    "babel-register": "^6.24.1",
-    "coveralls": "^2.13.1",
-    "cross-env": "^5.0.1",
-    "eslint": "^4.1.1",
-    "eslint-config-standard": "^10.2.1",
-    "eslint-plugin-import": "^2.6.1",
-    "eslint-plugin-node": "^5.1.0",
-    "eslint-plugin-promise": "^3.5.0",
-    "eslint-plugin-standard": "^3.0.1",
-    "nyc": "^11.0.3",
-    "object-assign": "^4.1.1",
-    "rollup": "^0.43.0",
-    "rollup-plugin-buble": "^0.15.0",
-    "rollup-plugin-commonjs": "^8.0.2",
-    "rollup-plugin-inject": "^2.0.0",
-    "rollup-plugin-node-resolve": "^3.0.0",
-    "rollup-plugin-uglify": "^2.0.1"
-  },
-  "babel": {
-    "presets": [
-      "es2015",
-      "stage-0"
-    ],
-    "env": {
-      "testing": {
-        "presets": [
-          "es2015",
-          "stage-0"
-        ],
-        "ignore": "test.js",
-        "sourceMaps": "inline"
-      }
-    }
-  },
-  "eslintConfig": {
-    "parser": "babel-eslint",
-    "extends": [
-      "standard"
-    ]
-  },
-  "standard": {
-    "parser": "babel-eslint"
-  },
-  "ava": {
-    "require": [
-      "babel-core/register"
-    ]
-  },
-  "nyc": {
-    "require": [
-      "babel-register"
-    ],
-    "checkCoverage": true,
-    "reporter": [
-      "text",
-      "lcov"
-    ]
+    "css-loader": "^0.28.7",
+    "extract-text-webpack-plugin": "^3.0.0",
+    "file-loader": "^0.11.2",
+    "html-loader": "^0.5.1",
+    "html-webpack-plugin": "^2.30.1",
+    "style-loader": "^0.18.2",
+    "ts-loader": "^2.3.4",
+    "tslint": "^5.7.0",
+    "tslint-config-standard": "^6.0.1",
+    "typescript": "^2.5.2",
+    "uglifyjs": "^2.4.11",
+    "vue": "^2.4.2",
+    "vue-class-component": "^5.0.2",
+    "vue-loader": "^13.0.4",
+    "vue-template-compiler": "^2.4.2",
+    "vue-typescript-import-dts": "^3.1.1",
+    "webpack": "^3.5.5",
+    "webpack-dev-server": "^2.7.1"
   }
 }

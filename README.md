@@ -4,8 +4,6 @@
 
 Printd is a small script to print HTMLElements. Printd opens [the Print Dialog](https://developer.mozilla.org/en-US/docs/Web/API/Window/print) to print elements inside a blank document. Also it supports [CSS Text](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) styles.
 
-__Development in progress...__
-
 ## Install
 
 [Yarn](https://github.com/yarnpkg/)
@@ -23,7 +21,7 @@ npm install printd --save-dev
 ## Usage
 
 ```js
-import printd from 'printd'
+import Printd from 'printd'
 
 // Some styles for the element (optional)
 const cssText = `
@@ -36,7 +34,8 @@ const cssText = `
 `
 
 // Opens the Print Dialog
-printd(document.getElementById('mytable'), cssText)
+const printer = new Printd()
+printer.print(document.getElementById('mytable'), cssText)
 ```
 
 ## Contributions

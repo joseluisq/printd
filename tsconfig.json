@@ -1,0 +1,35 @@
+{
+  "compileOnSave": false,
+  "include": [
+    "src"
+  ],
+  "compilerOptions": {
+    "outDir": "./dist",
+    "sourceMap": true,
+    "declaration": false,
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "strictNullChecks": true,
+    "noImplicitReturns": true,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "module": "es2015",
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "target": "es5",
+    "typeRoots": ["node_modules/@types"],
+    "types": ["vue-typescript-import-dts"],
+    "lib": [
+      "es2017",
+      "dom",
+      "es2015.generator",
+      "es2015.iterable",
+      "es2015.promise",
+      "es2015.symbol",
+      "es2015.symbol.wellknown",
+      "esnext.asynciterable"
+    ]
+  }
+}
