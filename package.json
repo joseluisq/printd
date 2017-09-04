@@ -15,12 +15,16 @@
   "engines": {
     "node": ">= 4"
   },
-  "main": "dist/index.js",
+  "main": "./dist/printd.umd.js",
   "scripts": {
+    "version": "npm run build",
     "start": "webpack-dev-server --config webpack.config.js",
-    "build": "node node_modules/typescript/lib/tsc.js --module umd && uglifyjs dist/index.js -cm --source-map -o dist/${npm_package_name}.min.js",
+    "build": "npm run clean && npm run compile && npm run minify:browser",
+    "compile": "node node_modules/typescript/lib/tsc.js && npm run compile:browser",
+    "compile:browser": "rollup -c && npm run minify:browser",
+    "minify:browser": "uglifyjs dist/${npm_package_name}.umd.js -cm --source-map -o dist/${npm_package_name}.umd.min.js",
     "watch": "node node_modules/typescript/lib/tsc.js --watch",
-    "clean": "node bin/clean.js",
+    "clean": "rm -rf dist",
     "test": "echo \"Error: no test specified\" && exit",
     "lint": "node node_modules/tslint/bin/tslint --format stylish --project tsconfig.json --type-check"
   },
@@ -30,6 +34,7 @@
     "file-loader": "^0.11.2",
     "html-loader": "^0.5.1",
     "html-webpack-plugin": "^2.30.1",
+    "rollup": "^0.49.2",
     "style-loader": "^0.18.2",
     "ts-loader": "^2.3.4",
     "tslint": "^5.7.0",

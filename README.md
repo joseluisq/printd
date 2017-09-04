@@ -1,6 +1,6 @@
 # Printd
 
-> [Print](https://developer.mozilla.org/en-US/docs/Web/API/Window/print) HTML elements in modern browsers.
+> [Print](https://developer.mozilla.org/en-US/docs/Web/API/Window/print) HTML elements in modern browsers. :print:
 
 Printd is a small script to print HTMLElements. Printd opens [the Print Dialog](https://developer.mozilla.org/en-US/docs/Web/API/Window/print) to print elements inside a blank document. Also it supports [CSS Text](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) styles.
 
@@ -18,12 +18,20 @@ yarn add printd --dev
 npm install printd --save-dev
 ```
 
+[UMD](https://github.com/umdjs/umd/) file is also available on [unpkg](https://unpkg.com):
+
+```html
+<script src="https://unpkg.com/printd/dist/printd.umd.min.js"></script>
+```
+
+You can use the library via `window.printd`.
+
 ## Usage
 
 ```js
 import Printd from 'printd'
-
-// Some styles for the element (optional)
+blue
+// some styles for the element (optional)
 const cssText = `
   table {
     font-size: 85%;
@@ -33,14 +41,54 @@ const cssText = `
   }
 `
 
-// Opens the Print Dialog
-const printer = new Printd()
-printer.print(document.getElementById('mytable'), cssText)
+const d = new Printd()
+
+// opens the "print dialog" of your browser to print the element
+d.print( document.getElementById('mytable'), cssText )
+```
+
+### Typescript
+
+```ts
+import Printd from 'printd'
+
+const cssText: string = `
+  h1 {
+    color: black;
+    font-family: sans-serif;
+  }
+`
+
+const d: Printd = new Printd()
+d.print( document.querySelector('#myelement'), cssText )
+```
+
+## API
+
+### Methods
+
+#### constructor
+The constructor supports an optional parent element (`HTMLElement`). Default value is `window.document.body`.
+
+Example:
+
+```js
+const d = new Printd( document.getElementById('myparent') )
+```
+
+#### print
+Prints the current `HTMLElement`. An optional `cssText` is supported to add custom style to the element.
+
+Example:
+
+```js
+const d = new Printd()
+d.print( document.querySelector('#h1'), `h1 { font-family: serif }` )
 ```
 
 ## Contributions
 
-Feel free to send some [Pull requests](https://github.com/joseluisq/printd/pulls) or [issues](https://github.com/joseluisq/printd/issues).
+Feel free to send some [Pull request](https://github.com/joseluisq/printd/pulls) or [issue](https://github.com/joseluisq/printd/issues).
 
 ## License
 MIT license

@@ -1,4 +1,4 @@
-export function createIFrame (parent: HTMLElement = window.document.body): HTMLIFrameElement {
+function createIFrame (parent: HTMLElement = window.document.body): HTMLIFrameElement {
   const el: HTMLIFrameElement = window.document.createElement('iframe')
   const css: string = 'visibility:hidden;width:0;height:0;position:absolute;z-index:-9999;bottom:0;'
 
@@ -13,7 +13,7 @@ export function createIFrame (parent: HTMLElement = window.document.body): HTMLI
   return el
 }
 
-export const createStyle = (doc: Document, cssText: string): HTMLStyleElement => {
+function createStyle (doc: Document, cssText: string): HTMLStyleElement {
   const style: HTMLStyleElement = doc.createElement('style')
 
   style.type = 'text/css'
@@ -22,7 +22,7 @@ export const createStyle = (doc: Document, cssText: string): HTMLStyleElement =>
   return style
 }
 
-export default class Printd {
+class Printd {
   private win: Window
   private doc: Document
   private parent: HTMLElement
@@ -46,7 +46,9 @@ export default class Printd {
       this.el = el
     }
 
-    this.appendStyle(cssText)
+    if (cssText) {
+      this.doc.head.appendChild(createStyle(this.doc, cssText))
+    }
 
     if (contentNode) {
       this.doc.body.innerHTML = ''
@@ -56,10 +58,8 @@ export default class Printd {
     this.doc.close()
     this.win.print()
   }
-
-  appendStyle (cssText: string = ''): void {
-    if (cssText) {
-      this.doc.head.appendChild(createStyle(this.doc, cssText))
-    }
-  }
 }
+
+export { createIFrame, createStyle, Printd }
+
+export default Printd

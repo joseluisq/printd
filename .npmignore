@@ -7,3 +7,4 @@ tslint.json
 *.log
 .vscode
 test
+/*.js

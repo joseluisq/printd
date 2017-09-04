@@ -1,8 +1,6 @@
 {
   "compileOnSave": false,
-  "include": [
-    "src"
-  ],
+  "include": [ "src" ],
   "compilerOptions": {
     "outDir": "./dist",
     "sourceMap": true,
@@ -19,8 +17,8 @@
     "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true,
     "target": "es5",
-    "typeRoots": ["node_modules/@types"],
-    "types": ["vue-typescript-import-dts"],
+    "typeRoots": [ "node_modules/@types" ],
+    "types": [ "vue-typescript-import-dts" ],
     "lib": [
       "es2017",
       "dom",
