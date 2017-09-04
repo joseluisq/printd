@@ -1,8 +1,10 @@
 # Printd
 
-> [Print](https://developer.mozilla.org/en-US/docs/Web/API/Window/print) HTML elements in modern browsers. :print:
+> [Print](https://developer.mozilla.org/en-US/docs/Web/API/Window/print) HTML elements in modern browsers. :printer:
 
 Printd is a small script to print HTMLElements. Printd opens [the Print Dialog](https://developer.mozilla.org/en-US/docs/Web/API/Window/print) to print elements inside a blank document. Also it supports [CSS Text](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) styles.
+
+:tada: View demo on [CodePen](https://codepen.io/joseluisq/full/VzRpGb/).
 
 ## Install
 
