@@ -2,7 +2,7 @@
 
 > [Print](https://developer.mozilla.org/en-US/docs/Web/API/Window/print) HTML elements in modern browsers. :printer:
 
-Printd is a small script to print HTMLElements. Printd opens [the Print Dialog](https://developer.mozilla.org/en-US/docs/Web/API/Window/print) to print elements inside a blank document. Also it supports [CSS Text](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) styles.
+Printd is a small script to print HTMLElements. Printd opens [the Print Dialog](https://developer.mozilla.org/en-US/docs/Web/API/Window/print) to print elements inside a blank document. It also supports [CSS Text](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for custom styles.
 
 :tada: View demo on [CodePen](https://codepen.io/joseluisq/full/VzRpGb/).
 
@@ -32,7 +32,7 @@ You can use the library via `window.printd`.
 
 ```js
 import Printd from 'printd'
-blue
+
 // some styles for the element (optional)
 const cssText = `
   table {
@@ -70,7 +70,7 @@ d.print( document.querySelector('#myelement'), cssText )
 ### Methods
 
 #### constructor
-The constructor supports an optional parent element (`HTMLElement`). Default value is `window.document.body`.
+The constructor supports an optional parent element (`HTMLElement`) where the printable element will be appended. Default value is `window.document.body`.
 
 Example:
 
@@ -79,7 +79,7 @@ const d = new Printd( document.getElementById('myparent') )
 ```
 
 #### print
-Prints the current `HTMLElement`. An optional `cssText` is supported to add custom style to the element.
+Prints the current `HTMLElement`. An optional `cssText` is supported to add custom styles to element.
 
 Example:
 
