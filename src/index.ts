@@ -34,7 +34,7 @@ class Printd {
 
   print (el: HTMLElement, cssText: string = ''): void {
     if (!this.win) {
-      const { contentWindow, contentDocument } = createIFrame()
+      const { contentWindow, contentDocument } = createIFrame(this.parent)
       this.win = contentWindow
       this.doc = contentDocument
     }
