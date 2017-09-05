@@ -1,8 +1,8 @@
 export class Printd {
-  constructor (parent: HTMLElement)
+  constructor (parent?: HTMLElement)
 
-  print (el: HTMLElement, cssText: string): void
+  print (el: HTMLElement, cssText?): void
 }
 
+export function createIFrame (parent?: HTMLElement): HTMLIFrameElement
 export function createStyle (doc: Document, cssText: string): HTMLStyleElement
-export function createIFrame (parent: HTMLElement): HTMLIFrameElement
