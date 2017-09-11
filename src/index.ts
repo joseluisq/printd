@@ -22,41 +22,46 @@ function createStyle (doc: Document, cssText: string): HTMLStyleElement {
   return style
 }
 
+type ICallback = (win: Window, doc: Document, node: HTMLElement) => void
+
 class Printd {
   private win: Window
   private doc: Document
   private parent: HTMLElement
   private el: HTMLElement
+  private node: HTMLElement | null = null
 
   constructor (parent: HTMLElement = window.document.body) {
     this.parent = parent
   }
 
-  print (el: HTMLElement, cssText: string = ''): void {
+  print (el: HTMLElement, cssText?: string, callback?: ICallback): void {
     if (!this.win) {
       const { contentWindow, contentDocument } = createIFrame(this.parent)
       this.win = contentWindow
       this.doc = contentDocument
     }
 
-    let contentNode: Node | null = null
-
     if (this.el !== el) {
-      contentNode = el.cloneNode(true)
       this.el = el
+      this.node = el.cloneNode(true) as HTMLElement
     }
 
     if (cssText) {
       this.doc.head.appendChild(createStyle(this.doc, cssText))
     }
 
-    if (contentNode) {
+    if (this.node) {
       this.doc.body.innerHTML = ''
-      this.doc.body.appendChild(contentNode)
-    }
+      this.doc.body.appendChild(this.node)
+      this.doc.close()
 
-    this.doc.close()
-    this.win.print()
+      if (callback) {
+        callback(this.win, this.doc, this.node)
+      } else {
+        this.win.print()
+      }
+    }
   }
 }
 

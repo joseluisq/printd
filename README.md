@@ -1,4 +1,4 @@
-# Printd [![Build Status](https://travis-ci.org/joseluisq/printd.svg?branch=master)](https://travis-ci.org/joseluisq/printd)
+# Printd [![npm](https://img.shields.io/npm/v/printd.svg)]() [![npm](https://img.shields.io/npm/dt/printd.svg)]() [![Build Status](https://travis-ci.org/joseluisq/printd.svg?branch=master)](https://travis-ci.org/joseluisq/printd) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
 > [Print](https://developer.mozilla.org/en-US/docs/Web/API/Window/print) HTML elements in modern browsers. :printer:
 
@@ -52,7 +52,7 @@ d.print( document.getElementById('mytable'), cssText )
 ### Typescript
 
 ```ts
-import Printd from 'printd'
+import { Printd } from 'printd'
 
 const cssText: string = `
   h1 {
@@ -62,7 +62,7 @@ const cssText: string = `
 `
 
 const d: Printd = new Printd()
-d.print( document.querySelector('#myelement'), cssText )
+d.print( document.getElementById('myelement'), cssText )
 ```
 
 ## API
@@ -79,13 +79,37 @@ const d = new Printd( document.getElementById('myparent') )
 ```
 
 #### print
-Prints the current `HTMLElement`. An optional `cssText` is supported to add custom styles to element.
+Prints the current `HTMLElement`.
 
-Example:
+__Params:__
+- __el:__ The `HTMLElement` to print.
+- __cssText:__ Optional [CSS Text](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) to add custom styles to the current element.
+- __callback:__ Optional callback function. _Inside the callback it's necessary to call `win.print()` to trigger the printing.
+  - __win__: `Window` reference.
+  - __doc__: `Document` reference.
+  - __node__: `HTMLElement` reference.
+
+Basic example:
 
 ```js
 const d = new Printd()
-d.print( document.querySelector('#h1'), `h1 { font-family: serif }` )
+d.print( document.getElementById('h1'), `h1 { font-family: serif; }` )
+```
+
+Callback example:
+
+```js
+const d = new Printd()
+const cssText = `
+  .code {
+    font-family: monospace;
+  }
+`
+
+d.print(document.getElementById('mycode'), cssText, (win, doc, node) => {
+  // trigger the printing
+  win.print()
+})
 ```
 
 ## Contributions
