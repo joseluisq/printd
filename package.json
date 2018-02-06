@@ -1,6 +1,6 @@
 {
   "name": "printd",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "Print HTML elements in modern browsers.",
   "repository": "joseluisq/printd",
   "license": "MIT",
@@ -8,7 +8,10 @@
     "name": "José Luis Quintana",
     "url": "http://git.io/joseluisq"
   },
-  "keywords": [ "print", "element printing" ],
+  "keywords": [
+    "print",
+    "element printing"
+  ],
   "engines": {
     "node": ">= 4"
   },
