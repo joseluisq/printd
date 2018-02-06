@@ -8,15 +8,12 @@
     "name": "José Luis Quintana",
     "url": "http://git.io/joseluisq"
   },
-  "keywords": [
-    "print",
-    "element printing"
-  ],
+  "keywords": [ "print", "element printing" ],
   "engines": {
     "node": ">= 4"
   },
   "main": "./dist/printd.umd.js",
-  "typings": "printd.d.ts",
+  "typings": "index.d.ts",
   "scripts": {
     "version": "npm run build",
     "build": "npm run clean && npm run compile && npm run minify:browser",

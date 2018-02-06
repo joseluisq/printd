@@ -1,18 +1,3 @@
-function createIFrame (parent: HTMLElement = window.document.body): HTMLIFrameElement {
-  const el: HTMLIFrameElement = window.document.createElement('iframe')
-  const css: string = 'visibility:hidden;width:0;height:0;position:absolute;z-index:-9999;bottom:0;'
-
-  el.setAttribute('style', css)
-  el.setAttribute('width', '0')
-  el.setAttribute('height', '0')
-  el.setAttribute('wmode', 'opaque')
-
-  parent.appendChild(el)
-  el.contentDocument.write('<!DOCTYPE html><html><head><meta charset="utf-8"></head><body></body></html>')
-
-  return el
-}
-
 function createStyle (doc: Document, cssText: string): HTMLStyleElement {
   const style: HTMLStyleElement = doc.createElement('style')
 
@@ -22,49 +7,63 @@ function createStyle (doc: Document, cssText: string): HTMLStyleElement {
   return style
 }
 
+function createIFrame (parent: HTMLElement = window.document.body): HTMLIFrameElement {
+  const el: HTMLIFrameElement = window.document.createElement('iframe')
+  const css: string = 'visibility:hidden;width:0;height:0;position:absolute;z-index:-9999;bottom:0;'
+
+  el.setAttribute('src', 'about:blank')
+  el.setAttribute('style', css)
+  el.setAttribute('width', '0')
+  el.setAttribute('height', '0')
+  el.setAttribute('wmode', 'opaque')
+
+  parent.appendChild(el)
+
+  return el
+}
+
 type ICallback = (win: Window, doc: Document, node: HTMLElement) => void
 
 class Printd {
-  private win: Window
-  private doc: Document
   private parent: HTMLElement
   private el: HTMLElement
   private node: HTMLElement | null = null
+  private iframe: HTMLIFrameElement
 
   constructor (parent: HTMLElement = window.document.body) {
     this.parent = parent
+    this.iframe = createIFrame(this.parent)
+  }
+
+  getIFrame (): HTMLIFrameElement {
+    return this.iframe
   }
 
   print (el: HTMLElement, cssText?: string, callback?: ICallback): void {
-    if (!this.win) {
-      const { contentWindow, contentDocument } = createIFrame(this.parent)
-      this.win = contentWindow
-      this.doc = contentDocument
-    }
-
     if (this.el !== el) {
       this.el = el
       this.node = el.cloneNode(true) as HTMLElement
     }
 
+    const { contentDocument, contentWindow } = this.iframe
+
     if (cssText) {
-      this.doc.head.appendChild(createStyle(this.doc, cssText))
+      contentDocument.head.appendChild(createStyle(contentDocument, cssText))
     }
 
     if (this.node) {
-      this.doc.body.innerHTML = ''
-      this.doc.body.appendChild(this.node)
-      this.doc.close()
+      contentDocument.body.innerHTML = ''
+      contentDocument.body.appendChild(this.node)
 
       if (callback) {
-        callback(this.win, this.doc, this.node)
+        callback(contentWindow, contentDocument, this.node)
       } else {
-        this.win.print()
+        contentWindow.print()
       }
     }
   }
 }
 
-export { createIFrame, createStyle, Printd }
+export { Printd, createIFrame, createStyle }
 
 export default Printd

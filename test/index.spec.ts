@@ -20,4 +20,13 @@ describe('Printd test suite', () => {
       done()
     })
   })
+
+  const iframeRef: HTMLIFrameElement = d.getIFrame()
+
+  it('should contains an HTMLIFrameElement reference', () => {
+    expect(typeof iframeRef).toBe('object')
+    expect(iframeRef instanceof HTMLIFrameElement).toBeTruthy()
+    expect(typeof iframeRef.contentDocument).toBe('object')
+    expect(typeof iframeRef.contentWindow).toBe('object')
+  })
 })
