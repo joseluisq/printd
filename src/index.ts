@@ -40,10 +40,8 @@ class Printd {
   }
 
   print (el: HTMLElement, cssText?: string, callback?: ICallback): void {
-    if (this.el !== el) {
-      this.el = el
-      this.node = el.cloneNode(true) as HTMLElement
-    }
+    this.el = el
+    this.node = el.cloneNode(true) as HTMLElement
 
     const { contentDocument, contentWindow } = this.iframe
 
