@@ -129,12 +129,17 @@ contentWindow.addEventListener('afterprint', () => console.log('after print!'))
 
 __Browser compatibility:__
 
-- Chrome 63+
+- Chrome Desktop 63+
+- Chrome for Android 64+
 - Firefox 6+
 - Edge
 - Internet Explorer
+- Opera Desktop 50+
+- Opera for Android 50+
 
-Reference: https://developer.mozilla.org/en-US/docs/Web/API/WindowEventHandlers/onbeforeprint
+References:
+- https://www.chromestatus.com/features/5700595042222080
+- https://developer.mozilla.org/en-US/docs/Web/API/WindowEventHandlers/onbeforeprint
 
 __Webkit-based and old browsers__
 
