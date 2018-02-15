@@ -10,3 +10,5 @@ coverage
 .vscode
 test
 /*.js
+.cache
+.test-lib
