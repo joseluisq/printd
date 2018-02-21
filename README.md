@@ -4,7 +4,8 @@
 
 Printd is a small script to print HTMLElements. Printd opens [the Print Dialog](https://developer.mozilla.org/en-US/docs/Web/API/Window/print) to print elements inside a blank document. It also supports [CSS Text](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for custom styles.
 
-:tada: View demo on [CodePen](https://codepen.io/joseluisq/full/VzRpGb/).
+- :rocket: [Live demo](https://codepen.io/joseluisq/full/VzRpGb/).
+- :books: [Demo source code](https://github.com/joseluisq/printd-vue-component-example).
 
 ## Install
 
@@ -139,6 +140,8 @@ __Browser compatibility:__
 
 References:
 - https://www.chromestatus.com/features/5700595042222080
+- https://caniuse.com/#feat=beforeafterprint
+- https://github.com/Fyrd/caniuse/pull/4086
 - https://developer.mozilla.org/en-US/docs/Web/API/WindowEventHandlers/onbeforeprint
 
 __Webkit-based and old browsers__
