@@ -4,8 +4,8 @@
 
 Printd is a small script to print HTMLElements. Printd opens [the Print Dialog](https://developer.mozilla.org/en-US/docs/Web/API/Window/print) to print elements inside a blank document. It also supports [CSS Text](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for custom styles.
 
-- :rocket: [Live demo](https://codepen.io/joseluisq/full/VzRpGb/).
-- :books: [Demo source code](https://github.com/joseluisq/printd-vue-component-example).
+- :rocket: [Live demo](https://codepen.io/joseluisq/full/VzRpGb/)
+- :books: [Demo source code](https://github.com/joseluisq/printd-vue-component-example)
 
 ## Install
 
@@ -30,6 +30,8 @@ npm install printd --save-dev
 You can use the library via `window.printd`.
 
 ## Usage
+
+### ES6
 
 ```js
 import { Printd } from 'printd'
@@ -109,10 +111,12 @@ const cssText = `
   }
 `
 
-d.print(document.getElementById('mycode'), cssText, (win, doc, node) => {
+const callback = (win, doc, node) => {
   // trigger the printing
   win.print()
-})
+}
+
+d.print(document.getElementById('mycode'), cssText, callback)
 ```
 
 #### getIFrame
@@ -131,7 +135,7 @@ contentWindow.addEventListener('afterprint', () => console.log('after print!'))
 __Browser compatibility:__
 
 - Chrome Desktop 63+
-- Chrome for Android 64+
+- Chrome for Android 63+
 - Firefox 6+
 - Edge
 - Internet Explorer
@@ -139,7 +143,7 @@ __Browser compatibility:__
 - Opera for Android 50+
 
 References:
-- https://www.chromestatus.com/features/5700595042222080
+- [Chrome Platform Status - beforeprint and afterprint events](https://www.chromestatus.com/features/5700595042222080)
 - https://caniuse.com/#feat=beforeafterprint
 - https://github.com/Fyrd/caniuse/pull/4086
 - https://developer.mozilla.org/en-US/docs/Web/API/WindowEventHandlers/onbeforeprint
