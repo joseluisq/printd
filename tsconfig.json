@@ -10,7 +10,6 @@
     "noImplicitThis": true,
     "strictNullChecks": true,
     "noImplicitReturns": true,
-    "noUnusedLocals": true,
     "noUnusedParameters": true,
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,

@@ -8,10 +8,7 @@
     "name": "José Luis Quintana",
     "url": "http://git.io/joseluisq"
   },
-  "keywords": [
-    "print",
-    "element printing"
-  ],
+  "keywords": [ "print", "element printing" ],
   "engines": {
     "node": ">= 4"
   },
@@ -25,7 +22,7 @@
     "minify:browser": "uglifyjs dist/${npm_package_name}.umd.js -cm --source-map -o dist/${npm_package_name}.umd.min.js",
     "watch": "node node_modules/typescript/lib/tsc.js --watch",
     "clean": "rm -rf dist",
-    "test": "karma start --single-run --reporters spec",
+    "test": "npm run lint && karma start --single-run --reporters spec",
     "test:watch": "karma start",
     "lint": "node node_modules/tslint/bin/tslint --format stylish --project tsconfig.json --type-check"
   },
