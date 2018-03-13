@@ -11,4 +11,4 @@ coverage
 test
 /*.js
 .cache
-.test-lib
+test-lib
