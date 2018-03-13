@@ -54,15 +54,15 @@ class Printd {
       if (callback) {
         callback(contentWindow, contentDocument, this.node, this.launchPrint)
       } else {
-        this.launchPrint(contentWindow);
+        this.launchPrint(contentWindow)
       }
     }
   }
 
-  launchPrint(contentWindow: Window) {
-    let result = contentWindow.document.execCommand('print', false, null);
+  launchPrint (contentWindow: Window) {
+    let result = contentWindow.document.execCommand('print', false, null)
     if (!result) {
-      contentWindow.print();
+      contentWindow.print()
     }
   }
 }
