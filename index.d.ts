@@ -1,4 +1,4 @@
-type ICallback = (win: Window, doc: Document, node: HTMLElement) => void
+type ICallback = (win: Window, doc: Document, node: HTMLElement, launchPrint: Function) => void
 
 export class Printd {
   constructor (parent?: HTMLElement)
