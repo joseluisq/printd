@@ -59,8 +59,9 @@ class Printd {
     }
   }
 
-  launchPrint (contentWindow: Window) {
-    let result = contentWindow.document.execCommand('print', false, null)
+  private launchPrint (contentWindow: Window): void {
+    const result: boolean = contentWindow.document.execCommand('print', false, null)
+
     if (!result) {
       contentWindow.print()
     }
