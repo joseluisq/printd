@@ -26,7 +26,7 @@ describe('Printd test suite', () => {
       expect(printd instanceof Printd).toBeTruthy()
     })
 
-    it('should track all the arguments of its calls (beforeprint)', () => {
+    it('should track all the arguments of its calls (print)', () => {
       expect(printd.print).toHaveBeenCalledWith(el, '', onEvent)
     })
 
