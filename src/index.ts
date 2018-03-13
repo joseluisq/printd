@@ -22,7 +22,7 @@ function createIFrame (parent: HTMLElement = window.document.body): HTMLIFrameEl
   return el
 }
 
-type ICallback = (win: Window, doc: Document, node: HTMLElement) => void
+type ICallback = (win: Window, doc: Document, node: HTMLElement, launchPrint: Function) => void
 
 class Printd {
   private parent: HTMLElement
@@ -52,10 +52,17 @@ class Printd {
       contentDocument.body.appendChild(this.node)
 
       if (callback) {
-        callback(contentWindow, contentDocument, this.node)
+        callback(contentWindow, contentDocument, this.node, this.launchPrint)
       } else {
-        contentWindow.print()
+        this.launchPrint(contentWindow);
       }
+    }
+  }
+
+  launchPrint(contentWindow: Window) {
+    let result = contentWindow.document.execCommand('print', false, null);
+    if (!result) {
+      contentWindow.print();
     }
   }
 }

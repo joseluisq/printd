@@ -89,10 +89,11 @@ Params:
 
 - __el:__ The `HTMLElement` to print.
 - __cssText:__ Optional [CSS Text](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) to add custom styles to the current element.
-- __callback:__ Optional callback function. _Inside the callback it's necessary to call `win.print()` to trigger the printing.
+- __callback:__ Optional callback function. _Inside the callback it's necessary to call `launchPrint(win)` to trigger the printing.
   - __win__: `Window` reference.
   - __doc__: `Document` reference.
   - __node__: `HTMLElement` reference.
+  - __launchPrint__: `Function` reference.
 
 Basic example:
 
@@ -111,9 +112,9 @@ const cssText = `
   }
 `
 
-const callback = (win, doc, node) => {
+const callback = (win, doc, node, launchPrint) => {
   // trigger the printing
-  win.print()
+  launchPrint.print(win)
 }
 
 d.print(document.getElementById('mycode'), cssText, callback)
