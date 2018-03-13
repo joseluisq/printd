@@ -16,15 +16,15 @@
   "typings": "index.d.ts",
   "scripts": {
     "version": "npm run build",
-    "build": "npm run clean && npm run compile && npm run minify:browser",
-    "compile": "node node_modules/typescript/lib/tsc.js --module es2015 && npm run compile:browser",
+    "build": "npm run test && npm run clean && npm run compile && npm run minify:browser",
+    "compile": "tsc --module es2015 && npm run compile:browser",
     "compile:browser": "rollup -c && npm run minify:browser",
     "minify:browser": "uglifyjs dist/${npm_package_name}.umd.js -cm --source-map -o dist/${npm_package_name}.umd.min.js",
-    "watch": "node node_modules/typescript/lib/tsc.js --watch",
+    "watch": "tsc --watch",
     "clean": "rm -rf dist",
     "test": "npm run lint && karma start --single-run --reporters spec",
     "test:watch": "karma start",
-    "lint": "node node_modules/tslint/bin/tslint --format stylish --project tsconfig.json --type-check"
+    "lint": "tslint --format stylish --project tsconfig.json --type-check"
   },
   "devDependencies": {
     "@types/jasmine": "^2.5.54",
