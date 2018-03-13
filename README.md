@@ -114,7 +114,7 @@ const cssText = `
 
 const callback = (win, doc, node, launchPrint) => {
   // trigger the printing
-  launchPrint.print(win)
+  launchPrint(win)
 }
 
 d.print(document.getElementById('mycode'), cssText, callback)
