@@ -43,18 +43,20 @@ class Printd {
 
     const { contentDocument, contentWindow } = this.iframe
 
-    if (cssText) {
-      contentDocument.head.appendChild(createStyle(contentDocument, cssText))
-    }
+    if (contentDocument && contentWindow) {
+      if (cssText) {
+        contentDocument.head.appendChild(createStyle(contentDocument, cssText))
+      }
 
-    if (this.node) {
-      contentDocument.body.innerHTML = ''
-      contentDocument.body.appendChild(this.node)
+      if (this.node) {
+        contentDocument.body.innerHTML = ''
+        contentDocument.body.appendChild(this.node)
 
-      if (callback) {
-        callback(contentWindow, contentDocument, this.node, this.launchPrint)
-      } else {
-        this.launchPrint(contentWindow)
+        if (callback) {
+          callback(contentWindow, contentDocument, this.node, this.launchPrint)
+        } else {
+          this.launchPrint(contentWindow)
+        }
       }
     }
   }
@@ -68,6 +70,6 @@ class Printd {
   }
 }
 
-export { Printd, createIFrame, createStyle }
+export { Printd, createIFrame, createStyle, ICallback }
 
 export default Printd
