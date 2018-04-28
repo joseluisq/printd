@@ -1,3 +1,18 @@
 {
-  "extends": "tslint-config-standard"
+  "extends": "dcl-tslint-config-standard",
+  "rules": {
+    "indent": [
+      true,
+      "spaces",
+      2
+    ],
+    "space-before-function-paren": [
+      true,
+      "always"
+    ],
+    "max-line-length": [
+      true,
+      120
+    ]
+  }
 }
