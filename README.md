@@ -83,26 +83,26 @@ const d = new Printd( document.getElementById('myparent') )
 ```
 
 #### print
-Prints the current `HTMLElement`.
+Function to print the current `HTMLElement`.
 
 Params:
 
 - __el:__ The `HTMLElement` to print.
 - __cssText:__ Optional [CSS Text](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) to add custom styles to the current element.
-- __callback:__ Optional callback function. _Inside the callback it's necessary to call `launchPrint(win)` to trigger the printing.
+- __callback:__ Optional callback function. _Inside the callback it's necessary to call `launchPrint(win)` to trigger the printing._
   - __win__: `Window` reference.
   - __doc__: `Document` reference.
   - __node__: `HTMLElement` reference.
-  - __launchPrint__: `Function` reference.
+  - __launchPrint(win)__: `Function` to trigger the printing on demand.
 
-Basic example:
+1. Basic example:
 
 ```js
 const d = new Printd()
 d.print( document.getElementById('h1'), `h1 { font-family: serif; }` )
 ```
 
-Callback example:
+2. Callback example:
 
 ```js
 const d = new Printd()
@@ -146,7 +146,7 @@ __Browser compatibility:__
 References:
 - [Chrome Platform Status - beforeprint and afterprint events](https://www.chromestatus.com/features/5700595042222080)
 - https://caniuse.com/#feat=beforeafterprint
-- https://github.com/Fyrd/caniuse/pull/4086
+- [PR: Update support for before/after print event handlers (Blink)](https://github.com/Fyrd/caniuse/pull/4086)
 - https://developer.mozilla.org/en-US/docs/Web/API/WindowEventHandlers/onbeforeprint
 
 __Webkit-based and old browsers__
