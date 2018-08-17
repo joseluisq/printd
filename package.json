@@ -15,14 +15,14 @@
   "engines": {
     "node": ">= 4"
   },
-  "main": "./index.js",
-  "typings": "./index.d.ts",
+  "main": "index.js",
+  "typings": "index.d.ts",
   "files": [
-    "./index.js",
-    "./index.d.ts",
-    "./*.min.js",
-    "./README.md",
-    "./LICENSE.md"
+    "index.js",
+    "index.d.ts",
+    "/*.min.js",
+    "README.md",
+    "LICENSE.md"
   ],
   "scripts": {
     "version": "npm run build",
