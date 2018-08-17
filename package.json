@@ -1,6 +1,6 @@
 {
   "name": "printd",
-  "version": "0.0.12",
+  "version": "1.0.0",
   "description": "Print HTML elements in modern browsers.",
   "repository": "joseluisq/printd",
   "license": "MIT",
