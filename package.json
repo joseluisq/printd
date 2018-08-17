@@ -15,35 +15,43 @@
   "engines": {
     "node": ">= 4"
   },
-  "main": "./dist/printd.umd.js",
-  "typings": "./dist/index.d.ts",
+  "main": "./index.js",
+  "typings": "./index.d.ts",
+  "files": [
+    "./index.js",
+    "./index.d.ts",
+    "./*.min.js",
+    "./README.md",
+    "./LICENSE.md"
+  ],
   "scripts": {
     "version": "npm run build",
-    "build": "npm run test && npm run clean && npm run compile && npm run minify:browser",
-    "compile": "tsc --module es2015 && npm run compile:browser",
-    "compile:browser": "rollup -c && npm run minify:browser",
-    "minify:browser": "uglifyjs dist/${npm_package_name}.umd.js -cm --source-map -o dist/${npm_package_name}.umd.min.js",
+    "build": "npm run test && npm run clean && npm run compile",
+    "compile": "npm run compile:browser && npm run compile:cjs",
+    "compile:cjs": "tsc --module commonjs --target es5",
+    "compile:browser": "rollup -c",
     "watch": "tsc --watch",
     "clean": "rm -rf dist",
     "test": "npm run lint && karma start --single-run --reporters spec",
-    "test:watch": "karma start",
+    "test:watch": "env NODE_ENV=debug karma start",
     "lint": "tslint --format stylish --project tsconfig.json"
   },
   "devDependencies": {
     "@types/jasmine": "^2.5.54",
     "@types/node": "^8.0.26",
-    "dcl-tslint-config-standard": "^1.0.1",
-    "jasmine-core": "^2.8.0",
+    "jasmine-core": "^3.2.1",
     "jasmine-spec-reporter": "^4.2.1",
-    "karma": "^1.7.1",
+    "karma": "^2.0.5",
     "karma-chrome-launcher": "^2.2.0",
-    "karma-jasmine": "^1.1.0",
-    "karma-jasmine-html-reporter": "^0.2.2",
-    "karma-spec-reporter": "^0.0.31",
-    "karma-typescript": "^3.0.5",
-    "rollup": "^0.49.2",
-    "tslint": "^5.9.1",
-    "typescript": "^2.8.3",
-    "uglifyjs": "^2.4.11"
+    "karma-jasmine": "^1.1.2",
+    "karma-jasmine-html-reporter": "^1.3.0",
+    "karma-spec-reporter": "^0.0.32",
+    "karma-typescript": "^3.0.13",
+    "rollup": "^0.64.1",
+    "rollup-plugin-terser": "^1.0.1",
+    "rollup-plugin-typescript2": "^0.16.1",
+    "tslint": "^5.11.0",
+    "tslint-config-standard-plus": "^2.0.1",
+    "typescript": "^2.9.2"
   }
 }

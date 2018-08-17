@@ -1,5 +1,5 @@
-// Place your settings in this file to overwrite default and user settings.
 {
+  "editor.formatOnSave": true,
   "editor.tabSize": 2,
   "editor.rulers": [
     120
@@ -16,7 +16,7 @@
     "npm": true
   },
   "eslint.enable": false,
+  "typescript.format.enable": false,
+  "tslint.enable": true,
   "tslint.autoFixOnSave": true,
-  "typescript.format.enable": true,
-  "typescript.tsdk": "node_modules/typescript/lib"
 }

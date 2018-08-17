@@ -2,7 +2,7 @@
 
 > [Print](https://developer.mozilla.org/en-US/docs/Web/API/Window/print) HTML elements in modern browsers. :printer:
 
-Printd is a small script to print HTMLElements. Printd opens [the Print Dialog](https://developer.mozilla.org/en-US/docs/Web/API/Window/print) to print elements inside a blank document. It also supports [CSS Text](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for custom styles.
+Printd is a small (`618 bytes` gzipped) script to print HTMLElements. Printd opens [the Print Dialog](https://developer.mozilla.org/en-US/docs/Web/API/Window/print) to print elements inside a blank document. It also supports [CSS Text](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for custom styles.
 
 - :rocket: [Live demo](https://codepen.io/joseluisq/full/VzRpGb/)
 - :books: [Demo source code](https://github.com/joseluisq/printd-vue-component-example)

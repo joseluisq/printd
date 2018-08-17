@@ -1,8 +1,13 @@
-*.log
 node_modules
 coverage
 dist
 **/.DS_Store
-test-lib
-lib
-.cache
+*.log
+/*.js
+/*.map
+/*.d.ts
+*cache
+
+!/*.config.js
+!/*.conf.js
+!/benchmark.js
