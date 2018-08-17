@@ -1,4 +1,4 @@
-function createStyle (doc: Document, cssText: string): HTMLStyleElement {
+export function createStyle (doc: Document, cssText: string): HTMLStyleElement {
   const style: HTMLStyleElement = doc.createElement('style')
 
   style.type = 'text/css'
@@ -7,9 +7,9 @@ function createStyle (doc: Document, cssText: string): HTMLStyleElement {
   return style
 }
 
-function createIFrame (parent: HTMLElement = window.document.body): HTMLIFrameElement {
+export function createIFrame (parent: HTMLElement = window.document.body): HTMLIFrameElement {
   const el: HTMLIFrameElement = window.document.createElement('iframe')
-  const css: string = 'visibility:hidden;width:0;height:0;position:absolute;z-index:-9999;bottom:0;'
+  const css = 'visibility:hidden;width:0;height:0;position:absolute;z-index:-9999;bottom:0;'
 
   el.setAttribute('src', 'about:blank')
   el.setAttribute('style', css)
@@ -22,9 +22,9 @@ function createIFrame (parent: HTMLElement = window.document.body): HTMLIFrameEl
   return el
 }
 
-type ICallback = (win: Window, doc: Document, node: HTMLElement, launchPrint: Function) => void
+export type PrintdCallback = (win: Window, doc: Document, node: HTMLElement, launchPrint: Function) => void
 
-class Printd {
+export default class Printd {
   private parent: HTMLElement
   private node: HTMLElement | null = null
   private iframe: HTMLIFrameElement
@@ -38,7 +38,7 @@ class Printd {
     return this.iframe
   }
 
-  print (el: HTMLElement, cssText?: string, callback?: ICallback): void {
+  print (el: HTMLElement, cssText?: string, callback?: PrintdCallback): void {
     this.node = el.cloneNode(true) as HTMLElement
 
     const { contentDocument, contentWindow } = this.iframe
@@ -70,6 +70,4 @@ class Printd {
   }
 }
 
-export { Printd, createIFrame, createStyle, ICallback }
-
-export default Printd
+export { Printd }
