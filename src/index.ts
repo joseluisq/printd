@@ -25,12 +25,10 @@ export function createIFrame (parent: HTMLElement = window.document.body): HTMLI
 export type PrintdCallback = (win: Window, doc: Document, node: HTMLElement, launchPrint: Function) => void
 
 export default class Printd {
-  private parent: HTMLElement
   private node: HTMLElement | null = null
-  private iframe: HTMLIFrameElement
+  private readonly iframe: HTMLIFrameElement
 
-  constructor (parent: HTMLElement = window.document.body) {
-    this.parent = parent
+  constructor (private readonly parent: HTMLElement = window.document.body) {
     this.iframe = createIFrame(this.parent)
   }
 

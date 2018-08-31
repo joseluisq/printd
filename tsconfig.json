@@ -14,8 +14,6 @@
     "declaration": true,
     "sourceMap": false,
     "pretty": true,
-    "noImplicitReturns": true,
-    "noUnusedParameters": true,
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
