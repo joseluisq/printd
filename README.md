@@ -12,13 +12,13 @@ Printd is a small (`618 bytes` gzipped) script to print HTMLElements. Printd ope
 [Yarn](https://github.com/yarnpkg/)
 
 ```sh
-yarn add printd --dev
+yarn add printd
 ```
 
 [NPM](https://www.npmjs.com/)
 
 ```sh
-npm install printd --save-dev
+npm install printd --save
 ```
 
 [UMD](https://github.com/umdjs/umd/) file is also available on [unpkg](https://unpkg.com):
