@@ -2,7 +2,16 @@
 
 > [Print](https://developer.mozilla.org/en-US/docs/Web/API/Window/print) HTML elements in modern browsers. :printer:
 
-Printd is a small (`618 bytes` gzipped) script to print HTMLElements. Printd opens [the Print Dialog](https://developer.mozilla.org/en-US/docs/Web/API/Window/print) to print elements inside a blank document. It also supports [CSS Text](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for custom styles.
+Printd opens your [Browser Print Dialog](https://developer.mozilla.org/en-US/docs/Web/API/Window/print) to print HTML elements inside a blank document.
+
+## Features
+
+- Written and tested entirely in [Typescript](./src/index.ts).
+- Tiny script (around `600 bytes` gzipped with no dependencies).
+- Print any element **_without_** opening a new window.
+- Custom [CSS Text](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) support.
+
+## Demos
 
 - :rocket: [Live demo](https://codepen.io/joseluisq/full/VzRpGb/)
 - :books: [Demo source code](https://github.com/joseluisq/printd-vue-component-example)
@@ -70,11 +79,9 @@ d.print( document.getElementById('myelement'), cssText )
 
 ## API
 
-### Methods
+### constructor
 
-#### constructor
-
-The constructor supports an optional parent element (`HTMLElement`) where the printable element will be appended. Default value is `window.document.body`.
+Constructor supports an optional parent element (`HTMLElement`) where the printable element will be appended. Default value is `window.document.body`.
 
 Example:
 
@@ -82,23 +89,31 @@ Example:
 const d = new Printd( document.getElementById('myparent') )
 ```
 
-#### print
+### print
 Function to print the current `HTMLElement`.
 
-Params:
+```ts
+d.print (el, cssText, callback)
+```
 
-- __el:__ The `HTMLElement` to print.
+__Print parameters:__
+
+- __element:__ The `HTMLElement` to print.
 - __cssText:__ Optional [CSS Text](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) to add custom styles to the current element.
-- __callback:__ Optional callback function. _Inside the callback it's necessary to call `launchPrint(win)` to trigger the printing._
-  - __win__: `Window` reference.
-  - __doc__: `Document` reference.
-  - __node__: `HTMLElement` reference.
-  - __launchPrint(win)__: `Function` to trigger the printing on demand.
+- __callback:__ Optional callback function. It's necessary to call `launchPrint()` to trigger the printing.
+
+__Print callback arguments:__
+
+- __document__: Iframe `contentDocument` reference.
+- __window__: Iframe `contentWindow` reference
+- __element__: `HTMLElement` copy reference.
+- __launchPrint__: `Function` to trigger the printing on demand.
 
 1. Basic example:
 
 ```js
 const d = new Printd()
+
 d.print( document.getElementById('h1'), `h1 { font-family: serif; }` )
 ```
 
@@ -112,28 +127,28 @@ const cssText = `
   }
 `
 
-const callback = (win, doc, node, launchPrint) => {
-  // trigger the printing
-  launchPrint(win)
-}
+// trigger the print dialog on demand
+const printCallback = ({ launchPrint }) => launchPrint()
 
-d.print(document.getElementById('mycode'), cssText, callback)
+d.print(document.getElementById('mycode'), cssText, printCallback)
 ```
 
-#### getIFrame
+### getIFrame
 
-Returns the current `HTMLIFrameElement` reference.
+Gets the current `HTMLIFrameElement` reference.
 
-### Events
+Example:
 
 ```ts
+const d = new Printd()
 const { contentWindow } = d.getIFrame()
 
+// subscribe to `beforeprint` and `afterprint` events
 contentWindow.addEventListener('beforeprint', () => console.log('before print!'))
 contentWindow.addEventListener('afterprint', () => console.log('after print!'))
 ```
 
-__Browser compatibility:__
+## Browser compatibility
 
 - Chrome Desktop 63+
 - Chrome for Android 63+
@@ -143,13 +158,14 @@ __Browser compatibility:__
 - Opera Desktop 50+
 - Opera for Android 50+
 
-References:
+__References:__
+
 - [Chrome Platform Status - beforeprint and afterprint events](https://www.chromestatus.com/features/5700595042222080)
 - https://caniuse.com/#feat=beforeafterprint
 - [PR: Update support for before/after print event handlers (Blink)](https://github.com/Fyrd/caniuse/pull/4086)
 - https://developer.mozilla.org/en-US/docs/Web/API/WindowEventHandlers/onbeforeprint
 
-__Webkit-based and old browsers__
+### Webkit-based and old browsers
 
 For Webkit-based browsers, it can create an equivalent result using `window.matchMedia('print')`.
 
@@ -167,7 +183,7 @@ if (contentWindow.matchMedia) {
 }
 ```
 
-References:
+__References:__
 - https://developer.mozilla.org/en-US/docs/Web/API/WindowEventHandlers/onbeforeprint
 - https://www.tjvantoll.com/2012/06/15/detecting-print-requests-with-javascript/
 
