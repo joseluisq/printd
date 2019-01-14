@@ -1,23 +1,18 @@
-import { Printd } from '../src'
+import { Printd, PrintdCallback } from '../src'
 
 describe('Printd test suite', () => {
   describe('api', () => {
     let printd: Printd
     let iframe: HTMLIFrameElement
-    let spy: jasmine.Spy
     let el: HTMLElement
-
-    const onEvent = () => true
+    let printSpy: jasmine.Spy
+    let printCallbackSpy: jasmine.Spy
 
     beforeEach(() => {
       printd = new Printd()
       iframe = printd.getIFrame()
-      spy = spyOn(printd, 'print')
-
       el = document.createElement('div')
       el.innerHTML = '<b>Bold text!</b>'
-
-      printd.print(el, '', onEvent)
     })
 
     it('should contain the Printd object', () => {
@@ -26,8 +21,36 @@ describe('Printd test suite', () => {
       expect(printd instanceof Printd).toBeTruthy()
     })
 
-    it('should track all the arguments of its calls (print)', () => {
-      expect(printd.print).toHaveBeenCalledWith(el, '', onEvent)
+    it('should track all the arguments of its calls (print)', function () {
+      printSpy = spyOn(printd, 'print')
+      printd.print(el, 'b{}')
+      expect(printSpy).toHaveBeenCalledWith(el, 'b{}')
+    })
+
+    it('should track all the arguments of its calls (printCallback)', function (done) {
+      const printCallback: PrintdCallback = (argObj) => {
+        printCallbackSpy(argObj)
+
+        expect(printCallbackSpy).toHaveBeenCalled()
+        expect(printCallbackSpy.calls.count()).toEqual(1)
+        expect(typeof argObj).toBe('object')
+
+        const args = Object.keys(argObj)
+
+        expect(args).toContain('window')
+        expect(args).toContain('document')
+        expect(args).toContain('element')
+        expect(args).toContain('launchPrint')
+        expect(typeof argObj.window).toBe('object')
+        expect(typeof argObj.document).toBe('object')
+        expect(typeof argObj.element).toBe('object')
+        expect(typeof argObj.launchPrint).toBe('function')
+
+        done()
+      }
+
+      printCallbackSpy = jasmine.createSpy('printCallback', printCallback)
+      printd.print(el, '', printCallback)
     })
 
     it('should contains an HTMLIFrameElement reference', () => {

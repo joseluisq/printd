@@ -22,7 +22,20 @@ export function createIFrame (parent: HTMLElement = window.document.body): HTMLI
   return el
 }
 
-export type PrintdCallback = (win: Window, doc: Document, node: HTMLElement, launchPrint: Function) => void
+export type PrintdLaunchPrint = (window: Window) => void
+
+export interface PrintdCallbackArgs {
+  /** Iframe contentWindow reference */
+  window: Window
+  /** Iframe contentDocument reference */
+  document: Document
+  /** HTMLElement copy reference */
+  element: HTMLElement
+  /** Launch the printing dialog */
+  launchPrint: PrintdLaunchPrint
+}
+
+export type PrintdCallback = (args: PrintdCallbackArgs) => void
 
 export default class Printd {
   private readonly iframe: HTMLIFrameElement
@@ -36,23 +49,29 @@ export default class Printd {
   }
 
   print (el: HTMLElement, cssText?: string, callback?: PrintdCallback): void {
-    const node = el.cloneNode(true) as HTMLElement
     const { contentDocument, contentWindow } = this.iframe
 
-    if (contentDocument && contentWindow) {
-      if (cssText) {
-        contentDocument.head.appendChild(createStyle(contentDocument, cssText))
-      }
+    if (!contentDocument || !contentWindow) return
 
-      if (node) {
-        contentDocument.body.innerHTML = ''
-        contentDocument.body.appendChild(node)
+    if (cssText) {
+      contentDocument.head.appendChild(createStyle(contentDocument, cssText))
+    }
 
-        if (callback) {
-          callback(contentWindow, contentDocument, node, this.launchPrint)
-        } else {
-          this.launchPrint(contentWindow)
-        }
+    const elCopy = el.cloneNode(true) as HTMLElement
+
+    if (elCopy) {
+      contentDocument.body.innerHTML = ''
+      contentDocument.body.appendChild(elCopy)
+
+      if (callback) {
+        callback({
+          window: contentWindow,
+          document: contentDocument,
+          element: elCopy,
+          launchPrint: () => this.launchPrint(contentWindow)
+        })
+      } else {
+        this.launchPrint(contentWindow)
       }
     }
   }
