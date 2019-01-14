@@ -25,7 +25,6 @@ export function createIFrame (parent: HTMLElement = window.document.body): HTMLI
 export type PrintdCallback = (win: Window, doc: Document, node: HTMLElement, launchPrint: Function) => void
 
 export default class Printd {
-  private node: HTMLElement | null = null
   private readonly iframe: HTMLIFrameElement
 
   constructor (private readonly parent: HTMLElement = window.document.body) {
@@ -37,8 +36,7 @@ export default class Printd {
   }
 
   print (el: HTMLElement, cssText?: string, callback?: PrintdCallback): void {
-    this.node = el.cloneNode(true) as HTMLElement
-
+    const node = el.cloneNode(true) as HTMLElement
     const { contentDocument, contentWindow } = this.iframe
 
     if (contentDocument && contentWindow) {
@@ -46,12 +44,12 @@ export default class Printd {
         contentDocument.head.appendChild(createStyle(contentDocument, cssText))
       }
 
-      if (this.node) {
+      if (node) {
         contentDocument.body.innerHTML = ''
-        contentDocument.body.appendChild(this.node)
+        contentDocument.body.appendChild(node)
 
         if (callback) {
-          callback(contentWindow, contentDocument, this.node, this.launchPrint)
+          callback(contentWindow, contentDocument, node, this.launchPrint)
         } else {
           this.launchPrint(contentWindow)
         }
