@@ -24,6 +24,16 @@
     "README.md",
     "LICENSE.md"
   ],
+  "bundlesize": [
+    {
+      "path": "./index.js",
+      "maxSize": "800 B"
+    },
+    {
+      "path": "./*.min.js",
+      "maxSize": "700 B"
+    }
+  ],
   "scripts": {
     "version": "npm run build",
     "build": "npm run test && npm run clean && npm run compile",
@@ -33,12 +43,14 @@
     "watch": "tsc --watch",
     "clean": "rm -rf dist",
     "test": "npm run lint && karma start --single-run --reporters spec",
+    "test:bundle": "yarn test && yarn build && bundlesize",
     "test:watch": "env NODE_ENV=debug karma start",
     "lint": "tslint --format stylish --project tsconfig.json"
   },
   "devDependencies": {
     "@types/jasmine": "^2.5.54",
     "@types/node": "^8.0.26",
+    "bundlesize": "^0.17.1",
     "git-testing-hook": "^0.3.0",
     "jasmine-core": "^3.2.1",
     "jasmine-spec-reporter": "^4.2.1",

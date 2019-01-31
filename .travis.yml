@@ -28,3 +28,6 @@ before_install:
 before_script:
   - "sudo chown root /usr/lib/chromium-browser/chrome-sandbox"
   - "sudo chmod 4755 /usr/lib/chromium-browser/chrome-sandbox"
+
+script:
+    - yarn test:bundle
