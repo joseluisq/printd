@@ -5,13 +5,16 @@ describe('Printd test suite', () => {
     let printd: Printd
     let iframe: HTMLIFrameElement
     let el: HTMLElement
+    let URL: string
     let printSpy: jasmine.Spy
+    let printURLSpy: jasmine.Spy
     let printCallbackSpy: jasmine.Spy
 
     beforeEach(() => {
       printd = new Printd()
       iframe = printd.getIFrame()
       el = document.createElement('div')
+      URL = 'http://127.0.0.1'
       el.innerHTML = '<b>Bold text!</b>'
     })
 
@@ -27,6 +30,12 @@ describe('Printd test suite', () => {
       expect(printSpy).toHaveBeenCalledWith(el, 'b{}')
     })
 
+    it('should track all the arguments of its calls (printURL)', function () {
+      printURLSpy = spyOn(printd, 'printURL')
+      printd.printURL(URL)
+      expect(printURLSpy).toHaveBeenCalledWith('http://127.0.0.1')
+    })
+
     it('should track all the arguments of its calls (printCallback)', function (done) {
       const printCallback: PrintdCallback = (argObj) => {
         printCallbackSpy(argObj)
@@ -37,12 +46,10 @@ describe('Printd test suite', () => {
 
         const args = Object.keys(argObj)
 
-        expect(args).toContain('window')
-        expect(args).toContain('document')
+        expect(args).toContain('iframe')
         expect(args).toContain('element')
         expect(args).toContain('launchPrint')
-        expect(typeof argObj.window).toBe('object')
-        expect(typeof argObj.document).toBe('object')
+        expect(typeof argObj.iframe).toBe('object')
         expect(typeof argObj.element).toBe('object')
         expect(typeof argObj.launchPrint).toBe('function')
 

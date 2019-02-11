@@ -1,6 +1,6 @@
 The MIT License (MIT)
 
-Copyright (c) 2017-present José Luis Quintana <https://git.io/joseluisq>
+Copyright (c) 2017-present José Quintana <https://git.io/joseluisq>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of
 this software and associated documentation files (the "Software"), to deal in

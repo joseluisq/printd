@@ -7,7 +7,7 @@ Printd opens your [Browser Print Dialog](https://developer.mozilla.org/en-US/doc
 ## Features
 
 - Written and tested entirely in [Typescript](./src/index.ts).
-- Tiny script (around `600 bytes` gzipped with no dependencies).
+- Tiny script (around `800 bytes` gzipped with no dependencies).
 - Print any element **_without_** opening a new window.
 - Custom [CSS Text](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) support.
 
@@ -40,33 +40,10 @@ You can use the library via `window.printd`.
 
 ## Usage
 
-### ES6
-
-```js
-import { Printd } from 'printd'
-
-// some styles for the element (optional)
-const cssText = `
-  table {
-    font-size: 85%;
-    font-family: sans-serif;
-    border-spacing: 0;
-    border-collapse: collapse;
-  }
-`
-
-const d = new Printd()
-
-// opens the "print dialog" of your browser to print the element
-d.print( document.getElementById('mytable'), cssText )
-```
-
-### Typescript
-
 ```ts
 import { Printd } from 'printd'
 
-const cssText: string = `
+const cssText = `
   h1 {
     color: black;
     font-family: sans-serif;
@@ -85,12 +62,12 @@ Constructor supports an optional parent element (`HTMLElement`) where the printa
 
 Example:
 
-```js
+```ts
 const d = new Printd( document.getElementById('myparent') )
 ```
 
 ### print
-Function to print the current `HTMLElement`.
+Function to print an `HTMLElement`.
 
 ```ts
 d.print (el, cssText, callback)
@@ -99,15 +76,12 @@ d.print (el, cssText, callback)
 __Print parameters:__
 
 - __element:__ The `HTMLElement` to print.
-- __cssText:__ Optional [CSS Text](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) to add custom styles to the current element.
-- __callback:__ Optional callback function. It's necessary to call `launchPrint()` to trigger the printing.
-
-__Print callback arguments:__
-
-- __document__: Iframe `contentDocument` reference.
-- __window__: Iframe `contentWindow` reference
-- __element__: `HTMLElement` copy reference.
-- __launchPrint__: `Function` to trigger the printing on demand.
+- __cssText:__ Optional [CSS Text](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) that will add to head section of the iframe document.
+- __callback:__ Optional callback that will be triggered when content is ready to print.
+  - __Callback arguments:__
+  - __iframe__: Iframe reference. `iframe` already contains `contentWindow` and `contentDocument` references.
+  - __element__: `HTMLElement` copy reference.
+  - __launchPrint__: Function to launch the print dialog after content was loaded.
 
 1. Basic example:
 
@@ -127,23 +101,47 @@ const cssText = `
   }
 `
 
-// trigger the print dialog on demand
+// trigger the print dialog on demand when content (E.g. text, images, etc) is ready to print
 const printCallback = ({ launchPrint }) => launchPrint()
 
 d.print(document.getElementById('mycode'), cssText, printCallback)
+```
+
+### printURL
+
+Function to print an URL.
+
+__PrintURL parameters:__
+
+- __url:__ URL to print.
+- __callback:__ Optional callback that will be triggered when content is ready to print.
+
+```ts
+const d = new Printd()
+
+d.printURL('http://127.0.0.1/', ({ launchPrint }) => {
+  console.log('Content loaded!')
+
+  // fire printing!
+  launchPrint()
+})
 ```
 
 ### getIFrame
 
 Gets the current `HTMLIFrameElement` reference.
 
-Example:
+Examples:
 
 ```ts
 const d = new Printd()
-const { contentWindow } = d.getIFrame()
+const iframe = d.getIFrame()
 
-// subscribe to `beforeprint` and `afterprint` events
+// a) Subscribe to IFrame load event
+iframe.addEventListener('load', () => console.log('iframe loaded!'))
+
+// b) Subscribe to Window `beforeprint` or `afterprint` events
+const { contentWindow } = iframe
 contentWindow.addEventListener('beforeprint', () => console.log('before print!'))
 contentWindow.addEventListener('afterprint', () => console.log('after print!'))
 ```
@@ -194,4 +192,4 @@ Feel free to send some [Pull request](https://github.com/joseluisq/printd/pulls)
 ## License
 MIT license
 
-© 2018 [José Luis Quintana](http://git.io/joseluisq)
+© 2017-present [José Quintana](http://git.io/joseluisq)
