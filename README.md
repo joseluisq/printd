@@ -11,7 +11,7 @@ Printd opens your [Browser Print Dialog](https://developer.mozilla.org/en-US/doc
 - Print any element **_without_** opening a new window.
 - Custom [CSS Text](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) support.
 - Printd waits until content such as images or fonts are ready to print.
-- Print an page by URL.
+- Print pages by URL.
 
 ## Demos
 
