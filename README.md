@@ -1,6 +1,6 @@
 # Printd [![npm](https://img.shields.io/npm/v/printd.svg)](https://www.npmjs.com/package/printd) [![npm](https://img.shields.io/npm/dt/printd.svg)](https://www.npmjs.com/package/printd) [![Build Status](https://travis-ci.org/joseluisq/printd.svg?branch=master)](https://travis-ci.org/joseluisq/printd) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
-> [Print](https://developer.mozilla.org/en-US/docs/Web/API/Window/print) HTML elements or URLs in modern browsers. :printer:
+> [Print](https://developer.mozilla.org/en-US/docs/Web/API/Window/print) HTML elements or pages in modern browsers. :printer:
 
 Printd opens your [Browser Print Dialog](https://developer.mozilla.org/en-US/docs/Web/API/Window/print) to print HTML elements inside a blank document or pages by URL.
 
@@ -10,7 +10,7 @@ Printd opens your [Browser Print Dialog](https://developer.mozilla.org/en-US/doc
 - Tiny script (around `800 bytes` gzipped with no dependencies).
 - Print any element **_without_** opening a new window.
 - Custom [CSS Text](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) support.
-- Printd waits until content such as images or fonts are ready to print.
+- Print only when assets such as images or fonts are ready (loaded).
 - Print pages by URL.
 
 ## Demos
@@ -52,8 +52,8 @@ const cssText = `
   }
 `
 
-const d: Printd = new Printd()
-d.print( document.getElementById('myelement'), cssText )
+const d = new Printd()
+d.print( document.getElementById('myElement'), cssText )
 ```
 
 ## API
@@ -72,18 +72,18 @@ const d = new Printd( document.getElementById('myparent') )
 Function to print an `HTMLElement`.
 
 ```ts
-d.print (el, cssText, callback)
+d.print (element, cssText, callback)
 ```
 
 __Print parameters:__
 
-- __element:__ The `HTMLElement` to print.
+- __element:__ Some `HTMLElement` object to print.
 - __cssText:__ Optional [CSS Text](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) that will add to head section of the iframe document.
 - __callback:__ Optional callback that will be triggered when content is ready to print.
-  - __Callback arguments:__
-  - __iframe__: Iframe reference. `iframe` already contains `contentWindow` and `contentDocument` references.
-  - __element__: `HTMLElement` copy reference.
-  - __launchPrint__: Function to launch the print dialog after content was loaded.
+  - __Available arguments:__
+  - __iframe__: An `HTMLIFrameElement` reference. It already contains `contentWindow` and `contentDocument` references.
+  - __element__: An `HTMLElement` copy (cloned node) reference of current element to print.
+  - __launchPrint__: Function to launch the print dialog after assets (images, fonts, etc) was loaded.
 
 1. Basic example:
 
@@ -95,6 +95,9 @@ d.print( document.getElementById('h1'), `h1 { font-family: serif; }` )
 
 2. Callback example:
 
+Callback option is suitable when you plan to print elements or pages with assets (images, fonts, etc) but you need to wait for them.
+Your callback will be trigered only when your assets are loaded. For example when print elements like images, text with fonts or if those are directly referenced in your styles.
+
 ```js
 const d = new Printd()
 const cssText = `
@@ -103,7 +106,7 @@ const cssText = `
   }
 `
 
-// trigger the print dialog on demand when content (E.g. text, images, etc) is ready to print
+// trigger the print dialog on demand
 const printCallback = ({ launchPrint }) => launchPrint()
 
 d.print(document.getElementById('mycode'), cssText, printCallback)
@@ -165,7 +168,7 @@ __References:__
 - [PR: Update support for before/after print event handlers (Blink)](https://github.com/Fyrd/caniuse/pull/4086)
 - https://developer.mozilla.org/en-US/docs/Web/API/WindowEventHandlers/onbeforeprint
 
-### Webkit-based and old browsers
+### beforeprint & afterprint workaround (Webkit-based and old browsers)
 
 For Webkit-based browsers, it can create an equivalent result using `window.matchMedia('print')`.
 
@@ -194,4 +197,4 @@ Feel free to send some [Pull request](https://github.com/joseluisq/printd/pulls)
 ## License
 MIT license
 
-© 2017-present [José Quintana](http://git.io/joseluisq)
+© 2017-present [José Quintana](https://git.io/joseluisq)
