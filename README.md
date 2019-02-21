@@ -9,9 +9,9 @@ Printd opens your [Browser Print Dialog](https://developer.mozilla.org/en-US/doc
 - Written and tested entirely in [Typescript](./src/index.ts).
 - Tiny script (around `800 bytes` gzipped with no dependencies).
 - Print any element **_without_** opening a new window.
-- Custom [CSS Text](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) support.
 - Print only when assets such as images or fonts are ready (loaded).
 - Print pages by URL.
+- Add styles and scripts on demand using text or URL.
 
 ## Demos
 
@@ -72,44 +72,50 @@ const d = new Printd( document.getElementById('myparent') )
 Function to print an `HTMLElement`.
 
 ```ts
-d.print (element, cssText, callback)
+d.print (element, styles, scripts, callback)
 ```
 
 __Print parameters:__
 
 - __element:__ Some `HTMLElement` object to print.
-- __cssText:__ Optional [CSS Text](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) that will add to head section of the iframe document.
+- __styles:__ Optional styles (array of texts or urls) that will add to iframe (`document.head`)
+- __scripts:__ Optional scripts (array of texts or urls) that will add to iframe (`document.body`)
 - __callback:__ Optional callback that will be triggered when content is ready to print.
-  - __Available arguments:__
+  - __callback arguments:__
   - __iframe__: An `HTMLIFrameElement` reference. It already contains `contentWindow` and `contentDocument` references.
   - __element__: An `HTMLElement` copy (cloned node) reference of current element to print.
   - __launchPrint__: Function to launch the print dialog after assets (images, fonts, etc) was loaded.
 
 1. Basic example:
 
-```js
+```ts
 const d = new Printd()
 
-d.print( document.getElementById('h1'), `h1 { font-family: serif; }` )
+d.print( document.getElementById('h1'), [`h1 { font-family: serif; }`] )
 ```
 
 2. Callback example:
 
-Callback option is suitable when you plan to print elements or pages with assets (images, fonts, etc) but you need to wait for them.
-Your callback will be trigered only when your assets are loaded. For example when print elements like images, text with fonts or if those are directly referenced in your styles.
+Callback option is suitable when you plan to print elements or pages with assets (images, fonts, etc) but you need to wait for them. Your callback will be trigered only when your assets are loaded.
 
-```js
+```ts
 const d = new Printd()
-const cssText = `
+
+// text or urls is supported
+const styles = [`
   .code {
     font-family: monospace;
   }
-`
+`]
+// text or urls is supported
+const scripts = [`
+  (() => console.log('Hello from IFrame!'))()
+`]
 
 // trigger the print dialog on demand
 const printCallback = ({ launchPrint }) => launchPrint()
 
-d.print(document.getElementById('mycode'), cssText, printCallback)
+d.print(document.getElementById('mycode'), styles, scripts, printCallback)
 ```
 
 ### printURL

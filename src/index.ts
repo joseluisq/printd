@@ -1,8 +1,22 @@
+const URL_LONG = /^(((http[s]?)|file):)?(\/\/)+([0-9a-zA-Z-_.=?&].+)$/g
+const URL_SHORT = /^([\.]?\/)([0-9a-zA-Z-_.=?&]+\/)*([0-9a-zA-Z-_.=?&]+)$/g
+const isValidURL = (str: string) => URL_LONG.test(str) || URL_SHORT.test(str)
+
 export function createStyle (doc: Document, cssText: string) {
   const style: HTMLStyleElement = doc.createElement('style')
 
   style.type = 'text/css'
   style.appendChild(window.document.createTextNode(cssText))
+
+  return style
+}
+
+export function createLinkStyle (doc: Document, url: string) {
+  const style: HTMLLinkElement = doc.createElement('link')
+
+  style.type = 'text/css'
+  style.rel = 'stylesheet'
+  style.href = url
 
   return style
 }
@@ -54,10 +68,11 @@ export default class Printd {
    * Print an HTMLElement
    *
    * @param el HTMLElement
-   * @param cssText Optional CSS Text that will add to head section of the iframe document
+   * @param styles Optional styles (css texts or urls) that will add to iframe document.head
+   * @param scripts Optional scripts (script texts or urls) that will add to iframe document.body
    * @param callback Optional callback that will be triggered when content is ready to print
    */
-  print (el: HTMLElement, cssText?: string, callback?: PrintdCallback) {
+  print (el: HTMLElement, styles?: string[], scripts?: string[], callback?: PrintdCallback) {
     if (this.loading) return
 
     const { contentDocument, contentWindow } = this.iframe
@@ -67,24 +82,52 @@ export default class Printd {
     this.iframe.src = 'about:blank'
     this.elCopy = el.cloneNode(true) as HTMLElement
 
-    if (this.elCopy) {
-      this.loading = true
-      this.callback = callback
+    if (!this.elCopy) return
 
-      const doc = contentWindow.document
+    this.loading = true
+    this.callback = callback
 
-      doc.open()
-      doc.write(`
-        <!DOCTYPE html><html><head><meta charset="utf-8"></head><body></body></html>
-      `)
+    const doc = contentWindow.document
 
-      if (cssText) {
-        doc.head.appendChild(createStyle(doc, cssText))
-      }
+    doc.open()
+    doc.write(`
+      <!DOCTYPE html><html><head><meta charset="utf-8"></head><body></body></html>
+    `)
 
-      doc.body.appendChild(this.elCopy)
-      doc.close()
+    // append custom styles
+    if (Array.isArray(styles)) {
+      styles.forEach((value) => {
+        if (value) {
+          if (isValidURL(value)) {
+            doc.head.appendChild(createLinkStyle(doc, value))
+          } else {
+            doc.head.appendChild(createStyle(doc, value))
+          }
+        }
+      })
     }
+
+    // append element copy
+    doc.body.appendChild(this.elCopy)
+
+    // append custom scripts
+    if (Array.isArray(scripts)) {
+      scripts.forEach((value) => {
+        if (value) {
+          const script = doc.createElement('script')
+
+          if (isValidURL(value)) {
+            script.src = value
+          } else {
+            script.innerText = value
+          }
+
+          doc.body.appendChild(script)
+        }
+      })
+    }
+
+    doc.close()
   }
 
   /**

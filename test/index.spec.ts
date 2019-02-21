@@ -26,8 +26,8 @@ describe('Printd test suite', () => {
 
     it('should track all the arguments of its calls (print)', function () {
       printSpy = spyOn(printd, 'print')
-      printd.print(el, 'b{}')
-      expect(printSpy).toHaveBeenCalledWith(el, 'b{}')
+      printd.print(el, [ 'b{}' ])
+      expect(printSpy).toHaveBeenCalledWith(el, [ 'b{}' ])
     })
 
     it('should track all the arguments of its calls (printURL)', function () {
@@ -57,7 +57,7 @@ describe('Printd test suite', () => {
       }
 
       printCallbackSpy = jasmine.createSpy('printCallback', printCallback)
-      printd.print(el, '', printCallback)
+      printd.print(el, [ '' ], [], printCallback)
     })
 
     it('should contains an HTMLIFrameElement reference', () => {

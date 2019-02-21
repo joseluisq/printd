@@ -7,8 +7,6 @@ const btn1 = document.getElementById('myButton1')
 const btn2 = document.getElementById('myButton2')
 
 const cssText = `
-  @import url('https://fonts.googleapis.com/css?family=Roboto');
-
   body {
     font-family: 'Roboto', sans-serif;
   }
@@ -29,12 +27,16 @@ btn1.addEventListener('click', printElement)
 btn2.addEventListener('click', printURL)
 
 function printElement () {
-  d.print(content, cssText, ({ launchPrint }) => {
-    console.log('Element printing: Content loaded!')
+  d.print(
+    content,
+    [ 'https://fonts.googleapis.com/css?family=Roboto', cssText ],
+    [ '(()=> console.log(\'Hello world from IFrame!\'))()' ],
+    ({ launchPrint }) => {
+      console.log('Element printing: Content loaded!')
 
     // fire printing!
-    launchPrint()
-  })
+      launchPrint()
+    })
 }
 
 function printURL () {

@@ -34,7 +34,7 @@
     },
     {
       "path": "./*.min.js",
-      "maxSize": "850B"
+      "maxSize": "1.5KB"
     }
   ],
   "scripts": {
@@ -46,7 +46,7 @@
     "watch": "tsc --watch",
     "clean": "rm -rf dist",
     "test": "npm run lint && karma start --single-run --reporters spec",
-    "test:bundle": "yarn test && yarn build && bundlesize",
+    "test:bundle": "yarn build && bundlesize",
     "test:watch": "env NODE_ENV=debug karma start",
     "lint": "tslint --format stylish --project tsconfig.json",
     "sample": "parcel sample/index.html"
