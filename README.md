@@ -96,7 +96,7 @@ d.print( document.getElementById('h1'), [`h1 { font-family: serif; }`] )
 
 2. Callback example:
 
-Callback option is suitable when you plan to print elements or pages with assets (images, fonts, etc) but you need to wait for them. Your callback will be trigered only when your assets are loaded.
+Callback option is suitable when you plan to print elements or pages with assets (images, fonts, etc) but you need to wait for them. Your callback will be triggered only when your assets are loaded.
 
 ```ts
 const d = new Printd()
