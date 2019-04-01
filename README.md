@@ -53,7 +53,7 @@ const cssText = `
 `
 
 const d = new Printd()
-d.print( document.getElementById('myElement'), cssText )
+d.print( document.getElementById('myelement'), [ cssText ] )
 ```
 
 ## API
@@ -101,21 +101,24 @@ Callback option is suitable when you plan to print elements or pages with assets
 ```ts
 const d = new Printd()
 
-// text or urls is supported
-const styles = [`
-  .code {
-    font-family: monospace;
-  }
-`]
-// text or urls is supported
-const scripts = [`
-  (() => console.log('Hello from IFrame!'))()
-`]
+// Tip: texts & urls are supported
 
-// trigger the print dialog on demand
+const styles = [
+  'https://your-cdn.dev/style.css',
+  `.code { font-family: monospace; }`
+]
+
+const scripts = [
+  'https://your-cdn.dev/script.js',
+  `(() => console.log('Hello from IFrame!'))()`
+]
+
+// Get an HTMLElement reference
+const el = document.getElementById('mycode-block')
+// Trigger the print dialog on demand
 const printCallback = ({ launchPrint }) => launchPrint()
 
-d.print(document.getElementById('mycode'), styles, scripts, printCallback)
+d.print(el, styles, scripts, printCallback)
 ```
 
 ### printURL
@@ -163,7 +166,7 @@ contentWindow.addEventListener('afterprint', () => console.log('after print!'))
 - Chrome for Android 63+
 - Firefox 6+
 - Edge
-- Internet Explorer
+- Internet Explorer 11
 - Opera Desktop 50+
 - Opera for Android 50+
 
