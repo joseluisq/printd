@@ -50,13 +50,13 @@ export type PrintdCallback = (args: PrintdCallbackArgs) => void
 /** Printd class that prints HTML elements in a blank document */
 export default class Printd {
   private readonly iframe: HTMLIFrameElement
-  private loading = false
+  private isLoading = false
+  private hasEvents = false
   private callback?: PrintdCallback
   private elCopy?: HTMLElement
 
   constructor (private readonly parent: HTMLElement = window.document.body) {
     this.iframe = createIFrame(this.parent)
-    this.iframe.addEventListener('load', () => this.loadEvent(), false)
   }
 
   /** Gets current Iframe reference */
@@ -73,7 +73,7 @@ export default class Printd {
    * @param callback Optional callback that will be triggered when content is ready to print
    */
   print (el: HTMLElement, styles?: string[], scripts?: string[], callback?: PrintdCallback) {
-    if (this.loading) return
+    if (this.isLoading) return
 
     const { contentDocument, contentWindow } = this.iframe
 
@@ -84,15 +84,15 @@ export default class Printd {
 
     if (!this.elCopy) return
 
-    this.loading = true
+    this.isLoading = true
     this.callback = callback
 
     const doc = contentWindow.document
 
     doc.open()
-    doc.write(`
-      <!DOCTYPE html><html><head><meta charset="utf-8"></head><body></body></html>
-    `)
+    doc.write('<!DOCTYPE html><html><head><meta charset="utf-8"></head><body></body></html>')
+
+    this.addEvents()
 
     // append custom styles
     if (Array.isArray(styles)) {
@@ -137,9 +137,10 @@ export default class Printd {
    * @param callback Optional callback that will be triggered when content is ready to print
    */
   printURL (url: string, callback?: PrintdCallback) {
-    if (this.loading) return
+    if (this.isLoading) return
 
-    this.loading = true
+    this.addEvents()
+    this.isLoading = true
     this.callback = callback
     this.iframe.src = url
   }
@@ -152,9 +153,16 @@ export default class Printd {
     }
   }
 
-  private loadEvent () {
+  private addEvents () {
+    if (!this.hasEvents) {
+      this.hasEvents = true
+      this.iframe.addEventListener('load', () => this.onLoad(), false)
+    }
+  }
+
+  private onLoad () {
     if (this.iframe) {
-      this.loading = false
+      this.isLoading = false
 
       const { contentDocument, contentWindow } = this.iframe
 
