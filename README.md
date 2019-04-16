@@ -7,7 +7,7 @@ Printd opens your [Browser Print Dialog](https://developer.mozilla.org/en-US/doc
 ## Features
 
 - Written and tested entirely in [Typescript](./src/index.ts).
-- Tiny script (around `800 bytes` gzipped with no dependencies).
+- Tiny script (around `1KB` gzipped with no dependencies).
 - Print any element **_without_** opening a new window.
 - Print only when assets such as images or fonts are ready (loaded).
 - Print pages by URL.
@@ -58,17 +58,30 @@ d.print( document.getElementById('myelement'), [ cssText ] )
 
 ## API
 
-### constructor
+### options
 
-Constructor supports an optional parent element (`HTMLElement`) where the printable element will be appended. Default value is `window.document.body`.
+- __parent__: Optional parent element where the printable element will be appended. Default `window.document.body`
+- __headElements__: Optional custom document `head` elements array.
+- __bodyElements__: Optional custom document `body` elements array.
 
 Example:
 
 ```ts
-const d = new Printd( document.getElementById('myparent') )
+// custom base element example
+const base = document.createElement('base')
+base.setAttribute('href', 'https://your-cdn.dev')
+
+// define options to use
+const options = {
+  parent: document.getElementById('myparent'),
+  headElements: [ base ]
+}
+
+const d = new Printd(options)
 ```
 
 ### print
+
 Function to print an `HTMLElement`.
 
 ```ts
@@ -86,7 +99,7 @@ __Print parameters:__
   - __element__: An `HTMLElement` copy (cloned node) reference of current element to print.
   - __launchPrint__: Function to launch the print dialog after assets (images, fonts, etc) was loaded.
 
-1. Basic example:
+#### 1. Basic example
 
 ```ts
 const d = new Printd()
@@ -94,7 +107,7 @@ const d = new Printd()
 d.print( document.getElementById('h1'), [`h1 { font-family: serif; }`] )
 ```
 
-2. Callback example:
+#### 2. Callback example
 
 Callback option is suitable when you plan to print elements or pages with assets (images, fonts, etc) but you need to wait for them. Your callback will be triggered only when your assets are loaded.
 

@@ -30,11 +30,11 @@
   "bundlesize": [
     {
       "path": "./index.js",
-      "maxSize": "1.5KB"
+      "maxSize": "1.6KB"
     },
     {
       "path": "./*.min.js",
-      "maxSize": "1.5KB"
+      "maxSize": "1.6KB"
     }
   ],
   "scripts": {

@@ -19,4 +19,5 @@
   "typescript.format.enable": false,
   "tslint.enable": true,
   "tslint.autoFixOnSave": true,
+  "typescript.tsdk": "node_modules/typescript/lib"
 }

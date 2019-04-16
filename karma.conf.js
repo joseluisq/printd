@@ -28,6 +28,20 @@ module.exports = (config) => {
       '**/*.ts': ['karma-typescript'],
       'test/**/*.spec.ts': ['karma-typescript']
     },
+    karmaTypescriptConfig: {
+      compilerOptions: {
+        lib: [
+          "es2017",
+          "dom",
+          "es2015.generator",
+          "es2015.iterable",
+          "es2015.promise",
+          "es2015.symbol",
+          "es2015.symbol.wellknown",
+          "esnext.asynciterable"
+        ]
+      }
+    },
     reporters: ['progress', 'kjhtml'],
     colors: true,
     logLevel: env === 'debug' ? config.LOG_DEBUG : config.LOG_INFO,

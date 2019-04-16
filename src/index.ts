@@ -21,7 +21,7 @@ export function createLinkStyle (doc: Document, url: string) {
   return style
 }
 
-export function createIFrame (parent: HTMLElement = window.document.body) {
+export function createIFrame (parent: HTMLElement) {
   const el: HTMLIFrameElement = window.document.createElement('iframe')
   const css = 'visibility:hidden;width:0;height:0;position:absolute;z-index:-9999;bottom:0;'
 
@@ -36,6 +36,15 @@ export function createIFrame (parent: HTMLElement = window.document.body) {
   return el
 }
 
+export interface PrintdOptions {
+  /** Parent element where the printable element will be appended. */
+  parent?: HTMLElement
+  /** Specifies a custom document head elements */
+  headElements?: HTMLElement[]
+  /** Specifies a custom document body elements */
+  bodyElements?: HTMLElement[]
+}
+
 export interface PrintdCallbackArgs {
   /** Iframe reference */
   iframe: HTMLIFrameElement
@@ -47,16 +56,24 @@ export interface PrintdCallbackArgs {
 
 export type PrintdCallback = (args: PrintdCallbackArgs) => void
 
+const DEFAULT_OPTIONS: PrintdOptions = {
+  parent: window.document.body,
+  headElements: [],
+  bodyElements: []
+}
+
 /** Printd class that prints HTML elements in a blank document */
 export default class Printd {
+  private readonly opts: Required<PrintdOptions>
   private readonly iframe: HTMLIFrameElement
   private isLoading = false
   private hasEvents = false
   private callback?: PrintdCallback
   private elCopy?: HTMLElement
 
-  constructor (private readonly parent: HTMLElement = window.document.body) {
-    this.iframe = createIFrame(this.parent)
+  constructor (options?: PrintdOptions) {
+    this.opts = Object.assign(DEFAULT_OPTIONS, (options || {})) as Required<PrintdOptions>
+    this.iframe = createIFrame(this.opts.parent)
   }
 
   /** Gets current Iframe reference */
@@ -94,7 +111,20 @@ export default class Printd {
 
     this.addEvents()
 
-    // append custom styles
+    // 1. append custom elements
+    const { headElements, bodyElements } = this.opts
+
+    // 1.1 append custom head elements
+    if (Array.isArray(headElements)) {
+      headElements.forEach((el) => doc.head.appendChild(el))
+    }
+
+    // 1.1 append custom body elements
+    if (Array.isArray(bodyElements)) {
+      bodyElements.forEach((el) => doc.body.appendChild(el))
+    }
+
+    // 2. append custom styles
     if (Array.isArray(styles)) {
       styles.forEach((value) => {
         if (value) {
@@ -107,10 +137,10 @@ export default class Printd {
       })
     }
 
-    // append element copy
+    // 3. append element copy
     doc.body.appendChild(this.elCopy)
 
-    // append custom scripts
+    // 4. append custom scripts
     if (Array.isArray(scripts)) {
       scripts.forEach((value) => {
         if (value) {

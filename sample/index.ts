@@ -1,16 +1,19 @@
 import { Printd } from '../src/index'
 
-const d = new Printd()
+// custom element example:
+// change base url in oder to test
+const base = document.createElement('base')
+base.setAttribute('href', 'http://localhost:1234')
+
+const d = new Printd({
+  headElements: [ base ]
+})
 
 const content = document.getElementById('myContent')
 const btn1 = document.getElementById('myButton1')
 const btn2 = document.getElementById('myButton2')
 
 const cssText = `
-  body {
-    font-family: 'Roboto', sans-serif;
-  }
-
   button {
     background-color: #fff;
     border: solid 2px peru;
@@ -29,7 +32,7 @@ btn2.addEventListener('click', printURL)
 function printElement () {
   d.print(
     content,
-    [ 'https://fonts.googleapis.com/css?family=Roboto', cssText ],
+    [ 'https://fonts.googleapis.com/css?family=Roboto', './base.css', cssText ],
     [ '(()=> console.log(\'Hello world from IFrame!\'))()' ],
     ({ launchPrint }) => {
       console.log('Element printing: Content loaded!')
