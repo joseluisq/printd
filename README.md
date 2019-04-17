@@ -35,7 +35,7 @@ npm install printd --save
 [UMD](https://github.com/umdjs/umd/) file is also available on [unpkg](https://unpkg.com):
 
 ```html
-<script src="https://unpkg.com/printd/dist/printd.umd.min.js"></script>
+<script src="https://unpkg.com/printd/printd.umd.min.js"></script>
 ```
 
 You can use the library via `window.printd`.
