@@ -52,7 +52,7 @@
     "sample": "parcel sample/index.html"
   },
   "devDependencies": {
-    "@types/jasmine": "2.8.8",
+    "@types/jasmine": "2.8.16",
     "@types/node": "8.10.26",
     "bundlesize": "0.17.1",
     "git-testing-hook": "0.3.0",
