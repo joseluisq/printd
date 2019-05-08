@@ -7514,14 +7514,14 @@ tslint-clean-code@^0.2.9:
     memoize-decorator "^1.0.2"
     tsutils "2.7.1"
 
-tslint-config-standard-plus@2.1.3:
-  version "2.1.3"
-  resolved "https://registry.yarnpkg.com/tslint-config-standard-plus/-/tslint-config-standard-plus-2.1.3.tgz#5fed93995d47dfb2ea066427af31e953e545bb32"
-  integrity sha512-28Z2yyz72GLfq1WwtGjfK7kOp7NeWqWXEPmrDH9A4nKd6AoDQ1z5CcHjIoDCkOR+RQLQOGb3tEaXCeEL5BcnYQ==
+tslint-config-standard-plus@2.1.4:
+  version "2.1.4"
+  resolved "https://registry.yarnpkg.com/tslint-config-standard-plus/-/tslint-config-standard-plus-2.1.4.tgz#819cab4485bc63d635a8280dce604751cfbbeca9"
+  integrity sha512-8XF8saJXQ4rx2i6YOT2i5OUniuuLq3Pj6kBC8gZecer/pzE32MODlJRWJ5uTb7/gnKVak3JMBBuOqtSXhueyfg==
   dependencies:
     tslint-clean-code "^0.2.9"
     tslint-eslint-rules "^5.4.0"
-    tslint-no-circular-imports "^0.6.1"
+    tslint-no-circular-imports "^0.6.2"
 
 tslint-eslint-rules@^5.4.0:
   version "5.4.0"
@@ -7532,10 +7532,10 @@ tslint-eslint-rules@^5.4.0:
     tslib "1.9.0"
     tsutils "^3.0.0"
 
-tslint-no-circular-imports@^0.6.1:
-  version "0.6.1"
-  resolved "https://registry.yarnpkg.com/tslint-no-circular-imports/-/tslint-no-circular-imports-0.6.1.tgz#a91358395a81c067bf104a641f269655057715cd"
-  integrity sha512-XuRgHZKFu6dv7fm/tuilmvynLHgtCTd63/p3744dYVEpnMExp2Jd9IwTiBOGmy5bUDlpTy117vtBcLd028RsBA==
+tslint-no-circular-imports@^0.6.2:
+  version "0.6.2"
+  resolved "https://registry.yarnpkg.com/tslint-no-circular-imports/-/tslint-no-circular-imports-0.6.2.tgz#ee00dbf6ebb98f8de45a8e3bf743d2656b2e8df4"
+  integrity sha512-WtOE8ArVcZzFDw62Ya/tzk0VeB4xLh4V0Eft2jxKHqUpDzz2S6J63AnhQv3YVyChaj7G4tBhPBE0tcVAflsw4A==
 
 tslint@5.16.0:
   version "5.16.0"
