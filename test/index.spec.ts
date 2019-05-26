@@ -1,4 +1,4 @@
-import { Printd, PrintdCallback } from '../src'
+import { Printd, PrintdCallback } from '../source'
 
 describe('Printd test suite', () => {
   describe('api', () => {

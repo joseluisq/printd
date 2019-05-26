@@ -7,7 +7,9 @@ dist
 /*.map
 /*.d.ts
 *cache
+.fusebox
 
 !/*.config.js
 !/*.conf.js
+!fuse.js
 !/benchmark.js

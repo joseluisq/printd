@@ -8,6 +8,7 @@
   "files.insertFinalNewline": true,
   "files.exclude": {
     "**/.git": true,
+    ".fusebox": true,
     "**/.DS_Store": true,
     "node_modules": true,
     "test-lib": true,
@@ -15,7 +16,6 @@
     "coverage": true,
     "npm": true
   },
-  "eslint.enable": false,
   "typescript.format.enable": false,
   "tslint.enable": true,
   "tslint.autoFixOnSave": true,

@@ -1,3 +1,6 @@
+const TS_SOURCE = '../source/**/*'
+const TS_TEST = '../test/**/*.spec.*'
+
 const realBrowser = String(process.env.BROWSER).match(/^(1|true)$/gi)
 const travisLaunchers = {
   chrome_travis: {
@@ -23,22 +26,33 @@ module.exports = (config) => {
     client: {
       clearContext: false // leave Jasmine Spec Runner output visible in browser
     },
-    files: [{ pattern: 'src/**/*.ts' }, { pattern: 'test/**/*.spec.ts' }],
+    files: [
+      { pattern: TS_SOURCE },
+      { pattern: TS_TEST }
+    ],
     preprocessors: {
-      '**/*.ts': ['karma-typescript'],
-      'test/**/*.spec.ts': ['karma-typescript']
+      [TS_SOURCE]: ['karma-typescript'],
+      [TS_TEST]: ['karma-typescript']
     },
     karmaTypescriptConfig: {
+      include: [
+        TS_SOURCE,
+        TS_TEST
+      ],
+      exclude: [
+        'dist',
+        'node_modules'
+      ],
       compilerOptions: {
         lib: [
-          "es2017",
-          "dom",
-          "es2015.generator",
-          "es2015.iterable",
-          "es2015.promise",
-          "es2015.symbol",
-          "es2015.symbol.wellknown",
-          "esnext.asynciterable"
+          'es2017',
+          'dom',
+          'es2015.generator',
+          'es2015.iterable',
+          'es2015.promise',
+          'es2015.symbol',
+          'es2015.symbol.wellknown',
+          'esnext.asynciterable'
         ]
       }
     },

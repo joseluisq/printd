@@ -5,7 +5,7 @@
   "repository": "joseluisq/printd",
   "license": "MIT",
   "author": {
-    "name": "José Luis Quintana",
+    "name": "José Quintana",
     "url": "http://git.io/joseluisq"
   },
   "keywords": [
@@ -18,12 +18,13 @@
   "engines": {
     "node": ">= 4"
   },
-  "main": "index.js",
-  "typings": "index.d.ts",
+  "main": "dist/printd.js",
+  "source": "source/index.ts",
+  "module": "dist/printd.mjs",
+  "unpkg": "dist/printd.umd.js",
+  "types": "dist/index.d.ts",
   "files": [
-    "index.js",
-    "index.d.ts",
-    "/*.min.js",
+    "dist",
     "README.md",
     "LICENSE.md"
   ],
@@ -39,22 +40,21 @@
   ],
   "scripts": {
     "version": "npm run build",
-    "build": "npm run test && npm run clean && npm run compile",
-    "compile": "npm run compile:browser && npm run compile:cjs",
-    "compile:cjs": "tsc --module commonjs --target es5",
-    "compile:browser": "rollup -c",
-    "watch": "tsc --watch",
-    "clean": "rm -rf dist",
-    "test": "npm run lint && karma start --single-run --reporters spec",
+    "build": "microbundle --no-sourcemap",
+    "prebuild": "yarn clean",
+    "clean": "rm -rf dist .fusebox .cache",
+    "test": "npm run lint && karma start config/karma.conf.js --single-run --reporters spec",
     "test:bundle": "yarn build && bundlesize",
-    "test:watch": "env NODE_ENV=debug karma start",
+    "test:watch": "env NODE_ENV=debug karma start config/karma.conf.js",
     "lint": "tslint --format stylish --project tsconfig.json",
-    "sample": "parcel sample/index.html"
+    "sample": "yarn clean && env NODE_ENV=development node config/fusebox.bundle.conf.js",
+    "sample:build": "yarn clean && env NODE_ENV=production node config/fusebox.bundle.conf.js dist"
   },
   "devDependencies": {
     "@types/jasmine": "3.3.12",
     "@types/node": "8.10.48",
     "bundlesize": "0.17.2",
+    "fuse-box": "^3.7.1",
     "git-testing-hook": "0.3.0",
     "jasmine-core": "3.4.0",
     "jasmine-spec-reporter": "4.2.1",
@@ -64,12 +64,11 @@
     "karma-jasmine-html-reporter": "1.4.2",
     "karma-spec-reporter": "0.0.32",
     "karma-typescript": "4.0.0",
-    "parcel-bundler": "1.12.3",
-    "rollup": "0.68.2",
-    "rollup-plugin-terser": "5.0.0",
-    "rollup-plugin-typescript2": "0.21.1",
-    "tslint": "5.16.0",
-    "tslint-config-standard-plus": "2.1.4",
-    "typescript": "2.9.2"
+    "microbundle": "^0.11.0",
+    "node-sass": "^4.12.0",
+    "terser": "^4.0.0",
+    "tslint": "^5.16.0",
+    "tslint-config-standard-plus": "^2.1.4",
+    "typescript": "^3.4.5"
   }
 }

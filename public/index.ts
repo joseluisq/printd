@@ -1,4 +1,5 @@
-import { Printd } from '../src/index'
+import { Printd } from './printd'
+import './style.scss'
 
 // custom element example:
 // change base url in oder to test
