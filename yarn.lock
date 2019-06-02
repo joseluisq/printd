@@ -6707,10 +6707,10 @@ tslint-clean-code@^0.2.9:
     memoize-decorator "^1.0.2"
     tsutils "2.7.1"
 
-tslint-config-standard-plus@2.1.4:
-  version "2.1.4"
-  resolved "https://registry.yarnpkg.com/tslint-config-standard-plus/-/tslint-config-standard-plus-2.1.4.tgz#819cab4485bc63d635a8280dce604751cfbbeca9"
-  integrity sha512-8XF8saJXQ4rx2i6YOT2i5OUniuuLq3Pj6kBC8gZecer/pzE32MODlJRWJ5uTb7/gnKVak3JMBBuOqtSXhueyfg==
+tslint-config-standard-plus@2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/tslint-config-standard-plus/-/tslint-config-standard-plus-2.2.0.tgz#15b93e8cacd81e234fb4de1fccf2b61d9f688b97"
+  integrity sha512-6xN3d4XGIjkd+7+MvT5vX5BmcNpajvqrPzdWpVJ8nT5OFHZpGCirownLs3pND2rObuMiU/JKoLsjlISitcNWsg==
   dependencies:
     tslint-clean-code "^0.2.9"
     tslint-eslint-rules "^5.4.0"
