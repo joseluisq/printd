@@ -3754,10 +3754,10 @@ karma-spec-reporter@0.0.32:
   dependencies:
     colors "^1.1.2"
 
-karma-typescript@4.1.0:
-  version "4.1.0"
-  resolved "https://registry.yarnpkg.com/karma-typescript/-/karma-typescript-4.1.0.tgz#963a1f6578acf1553a2635c6fda53369fe15118c"
-  integrity sha512-FhoZlPWVlkWN110KrUYcAOxTPeyvw9kg3uolxP2s/DsmUthdc5MWgl84yOr4j3xFGHStd9wLqek1nGRkFcJ35A==
+karma-typescript@4.1.1:
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/karma-typescript/-/karma-typescript-4.1.1.tgz#2b37164e31f23397cf35774fb436e3a7e7f78a29"
+  integrity sha512-NiGt3Lh8pxKY6hSW4mBV7X45zfB+EA4ezVMNN/vnzLvN+du0UoEc8lTAhrD/DMrjKP3wDlpabku652svRyguXg==
   dependencies:
     acorn "^6.0.5"
     acorn-walk "^6.1.1"
