@@ -212,6 +212,18 @@ __References:__
 - https://developer.mozilla.org/en-US/docs/Web/API/WindowEventHandlers/onbeforeprint
 - https://www.tjvantoll.com/2012/06/15/detecting-print-requests-with-javascript/
 
+
+## Security
+
+Since Printd uses an underlying iframe it's highly recommended to ensure that only your content will be displayed.
+As a fallback you could remove the hidden iframe after some printing.
+
+Here some interesting security advices that you want to take at look:
+
+- [Why are iframes considered dangerous and a security risk?](https://stackoverflow.com/a/9428051/2510591)
+- [MDN: X-Frame-Options](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options)
+- [Play safely in sandboxed IFrames](https://www.html5rocks.com/en/tutorials/security/sandboxed-iframes/)
+
 ## Contributions
 
 Feel free to send some [Pull request](https://github.com/joseluisq/printd/pulls) or [issue](https://github.com/joseluisq/printd/issues).
