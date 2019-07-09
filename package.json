@@ -67,7 +67,7 @@
     "parcel-bundler": "1.12.3",
     "rollup": "0.68.2",
     "rollup-plugin-terser": "5.1.0",
-    "rollup-plugin-typescript2": "0.21.1",
+    "rollup-plugin-typescript2": "0.21.2",
     "tslint": "5.18.0",
     "tslint-config-standard-plus": "2.2.0",
     "typescript": "2.9.2"
