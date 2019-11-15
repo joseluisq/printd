@@ -22,6 +22,7 @@ export function createLinkStyle (doc: Document, url: string) {
 }
 
 export function createIFrame (parent: HTMLElement) {
+  if (typeof window!=="undefined"){
   const el: HTMLIFrameElement = window.document.createElement('iframe')
   const css = 'visibility:hidden;width:0;height:0;position:absolute;z-index:-9999;bottom:0;'
 
@@ -34,6 +35,9 @@ export function createIFrame (parent: HTMLElement) {
   parent.appendChild(el)
 
   return el
+}else{
+  return null
+}
 }
 
 export interface PrintdOptions {
@@ -57,7 +61,7 @@ export interface PrintdCallbackArgs {
 export type PrintdCallback = (args: PrintdCallbackArgs) => void
 
 const DEFAULT_OPTIONS: PrintdOptions = {
-  parent: window.document.body,
+  parent: typeof window!=="undefined"? window.document.body:null,
   headElements: [],
   bodyElements: []
 }
