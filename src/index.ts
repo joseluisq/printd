@@ -22,22 +22,23 @@ export function createLinkStyle (doc: Document, url: string) {
 }
 
 export function createIFrame (parent: HTMLElement) {
-  if (typeof window!=="undefined"){
-  const el: HTMLIFrameElement = window.document.createElement('iframe')
-  const css = 'visibility:hidden;width:0;height:0;position:absolute;z-index:-9999;bottom:0;'
+  // tslint:disable-next-line
+  if (typeof window !== 'undefined') {
+    const el: HTMLIFrameElement = window.document.createElement('iframe')
+    const css = 'visibility:hidden;width:0;height:0;position:absolute;z-index:-9999;bottom:0;'
 
-  el.setAttribute('src', 'about:blank')
-  el.setAttribute('style', css)
-  el.setAttribute('width', '0')
-  el.setAttribute('height', '0')
-  el.setAttribute('wmode', 'opaque')
+    el.setAttribute('src', 'about:blank')
+    el.setAttribute('style', css)
+    el.setAttribute('width', '0')
+    el.setAttribute('height', '0')
+    el.setAttribute('wmode', 'opaque')
 
-  parent.appendChild(el)
+    parent.appendChild(el)
 
-  return el
-}else{
-  return null
-}
+    return el
+  } else {
+    return null
+  }
 }
 
 export interface PrintdOptions {
@@ -61,7 +62,8 @@ export interface PrintdCallbackArgs {
 export type PrintdCallback = (args: PrintdCallbackArgs) => void
 
 const DEFAULT_OPTIONS: PrintdOptions = {
-  parent: typeof window!=="undefined"? window.document.body:null,
+  // tslint:disable-next-line
+  parent: typeof window !== 'undefined' ? window.document.body : undefined,
   headElements: [],
   bodyElements: []
 }
@@ -69,7 +71,7 @@ const DEFAULT_OPTIONS: PrintdOptions = {
 /** Printd class that prints HTML elements in a blank document */
 export default class Printd {
   private readonly opts: Required<PrintdOptions>
-  private readonly iframe: HTMLIFrameElement
+  private readonly iframe: HTMLIFrameElement | null
   private isLoading = false
   private hasEvents = false
   private callback?: PrintdCallback
