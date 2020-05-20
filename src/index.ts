@@ -23,10 +23,9 @@ export function createLinkStyle (doc: Document, url: string) {
 
 export function createIFrame (parent: HTMLElement) {
     const el: HTMLIFrameElement = window.document.createElement("iframe")
-    const css = "visibility:hidden;width:0;height:0;position:absolute;z-index:-9999;bottom:0;"
 
     el.setAttribute("src", "about:blank")
-    el.setAttribute("style", css)
+    el.setAttribute("style", "visibility:hidden;width:0;height:0;position:absolute;z-index:-9999;bottom:0;")
     el.setAttribute("width", "0")
     el.setAttribute("height", "0")
     el.setAttribute("wmode", "opaque")
@@ -128,11 +127,9 @@ export default class Printd {
         if (Array.isArray(styles)) {
             styles.forEach((value) => {
                 if (value) {
-                    if (isValidURL(value)) {
-                        doc.head.appendChild(createLinkStyle(doc, value))
-                    } else {
-                        doc.head.appendChild(createStyle(doc, value))
-                    }
+                    doc.head.appendChild(
+                        isValidURL(value) ? createLinkStyle(doc, value) : createStyle(doc, value)
+                    )
                 }
             })
         }
