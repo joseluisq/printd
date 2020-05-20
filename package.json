@@ -69,7 +69,7 @@
     "rollup-plugin-terser": "5.1.1",
     "rollup-plugin-typescript2": "0.21.2",
     "tslint": "5.18.0",
-    "tslint-config-standard-plus": "2.2.0",
+    "tslint-config-standard-plus": "^2.3.0",
     "typescript": "2.9.2"
   }
 }

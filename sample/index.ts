@@ -1,17 +1,17 @@
-import { Printd } from '../src/index'
+import { Printd } from "../src/index"
 
 // custom element example:
 // change base url in oder to test
-const base = document.createElement('base')
-base.setAttribute('href', 'http://localhost:1234')
+const base = document.createElement("base")
+base.setAttribute("href", "http://localhost:1234")
 
 const d = new Printd({
-  headElements: [ base ]
+    headElements: [ base ]
 })
 
-const content = document.getElementById('myContent')
-const btn1 = document.getElementById('myButton1')
-const btn2 = document.getElementById('myButton2')
+const content = document.getElementById("myContent")
+const btn1 = document.getElementById("myButton1")
+const btn2 = document.getElementById("myButton2")
 
 const cssText = `
   button {
@@ -26,27 +26,28 @@ const cssText = `
   }
 `
 
-btn1.addEventListener('click', printElement)
-btn2.addEventListener('click', printURL)
+btn1.addEventListener("click", printElement)
+btn2.addEventListener("click", printURL)
 
 function printElement () {
-  d.print(
+    d.print(
     content,
-    [ 'https://fonts.googleapis.com/css?family=Roboto', './base.css', cssText ],
-    [ '(()=> console.log(\'Hello world from IFrame!\'))()' ],
+    [ "https://fonts.googleapis.com/css?family=Roboto", "./base.css", cssText ],
+    [ "(()=> console.log('Hello world from IFrame!'))()" ],
     ({ launchPrint }) => {
-      console.log('Element printing: Content loaded!')
+        console.log("Element printing: Content loaded!")
 
-    // fire printing!
-      launchPrint()
-    })
+        // fire printing!
+        launchPrint()
+    }
+  )
 }
 
 function printURL () {
-  d.printURL('http://localhost:1234/', ({ launchPrint }) => {
-    console.log('URL printing: Content loaded!')
+    d.printURL("http://localhost:1234/", ({ launchPrint }) => {
+        console.log("URL printing: Content loaded!")
 
-    // fire printing!
-    launchPrint()
-  })
+        // fire printing!
+        launchPrint()
+    })
 }
