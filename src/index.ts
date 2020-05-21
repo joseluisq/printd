@@ -43,7 +43,7 @@ export interface PrintdOptions {
     /** Specifies a custom document body elements */
     bodyElements?: HTMLElement[]
 
-    [key: string]: undefined | HTMLElement | HTMLElement[]
+    [key: string]: HTMLElement | HTMLElement[] | undefined
 }
 
 export interface PrintdCallbackArgs {
@@ -74,7 +74,7 @@ export default class Printd {
 
     constructor (options?: PrintdOptions) {
         // IE 11+ "Object.assign" polyfill
-        this.opts = [ options || {}, DEFAULT_OPTIONS ].reduce((a, b) => {
+        this.opts = [ DEFAULT_OPTIONS, options || {} ].reduce((a, b) => {
             Object.keys(b).forEach((k) => (a[k] = b[k]))
             return a
         }, {}) as Required<PrintdOptions>
