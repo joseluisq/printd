@@ -42,6 +42,8 @@ export interface PrintdOptions {
     headElements?: HTMLElement[]
     /** Specifies a custom document body elements */
     bodyElements?: HTMLElement[]
+
+    [key: string]: undefined | HTMLElement | HTMLElement[]
 }
 
 export interface PrintdCallbackArgs {
@@ -71,7 +73,12 @@ export default class Printd {
     private elCopy?: HTMLElement
 
     constructor (options?: PrintdOptions) {
-        this.opts = Object.assign(DEFAULT_OPTIONS, (options || {})) as Required<PrintdOptions>
+        // IE 11+ "Object.assign" polyfill
+        this.opts = [ options || {}, DEFAULT_OPTIONS ].reduce((a, b) => {
+            Object.keys(b).forEach((k) => (a[k] = b[k]))
+            return a
+        }, {}) as Required<PrintdOptions>
+
         this.iframe = createIFrame(this.opts.parent)
     }
 
