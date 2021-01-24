@@ -1,4 +1,4 @@
-# Printd [![Build Status](https://travis-ci.com/joseluisq/printd.svg?branch=master)](https://travis-ci.com/joseluisq/printd) [![npm](https://img.shields.io/npm/v/printd.svg)](https://www.npmjs.com/package/printd) [![npm](https://img.shields.io/npm/dt/printd.svg)](https://www.npmjs.com/package/printd) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+# Printd ![CI](https://github.com/joseluisq/printd/workflows/CI/badge.svg?branch=master) [![npm](https://img.shields.io/npm/v/printd.svg)](https://www.npmjs.com/package/printd) [![npm](https://img.shields.io/npm/dt/printd.svg)](https://www.npmjs.com/package/printd) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
 > [Print](https://developer.mozilla.org/en-US/docs/Web/API/Window/print) HTML elements or pages in modern browsers. :printer:
 

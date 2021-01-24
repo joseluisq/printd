@@ -1,12 +1,21 @@
 const realBrowser = String(process.env.BROWSER).match(/^(1|true)$/gi)
-const travisLaunchers = {
-  chrome_travis: {
-    base: 'Chrome',
-    flags: ['--no-sandbox']
-  }
-}
+const localLaunchers = {
+	ChromeNoSandboxHeadless: {
+		base: 'Chrome',
+		flags: [
+			'--no-sandbox',
+			'--disable-setuid-sandbox',
+			// See https://chromium.googlesource.com/chromium/src/+/lkgr/headless/README.md
+			'--headless',
+			'--disable-gpu',
+			'--no-gpu',
+			// Without a remote debugging port, Google Chrome exits immediately.
+			'--remote-debugging-port=9333'
+		]
+	}
+};
 
-const localBrowsers = realBrowser ? Object.keys(travisLaunchers) : ['Chrome']
+const browsers = realBrowser ? ['Chrome'] : Object.keys(localLaunchers)
 
 module.exports = (config) => {
   const env = process.env['NODE_ENV'] || 'development'
@@ -46,7 +55,8 @@ module.exports = (config) => {
     colors: true,
     logLevel: env === 'debug' ? config.LOG_DEBUG : config.LOG_INFO,
     autoWatch: true,
-    browsers: localBrowsers,
+    browsers: browsers,
+    customLaunchers: localLaunchers,
     singleRun: false
   })
 }
