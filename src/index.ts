@@ -9,7 +9,7 @@ export function createStyle (doc: Document, cssText: string) {
 }
 
 export function createLinkStyle (doc: Document, url: string) {
-    const style: HTMLLinkElement = doc.createElement("link")
+    const style = doc.createElement("link")
     style.type = "text/css"
     style.rel = "stylesheet"
     style.href = url
@@ -17,7 +17,7 @@ export function createLinkStyle (doc: Document, url: string) {
 }
 
 export function createIFrame (parent: HTMLElement) {
-    const el: HTMLIFrameElement = window.document.createElement("iframe")
+    const el = window.document.createElement("iframe")
     el.setAttribute("src", "about:blank")
     el.setAttribute("style", "visibility:hidden;width:0;height:0;position:absolute;z-index:-9999;bottom:0;")
     el.setAttribute("width", "0")
