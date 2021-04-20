@@ -36,9 +36,7 @@ describe("Printd test suite", () => {
             expect(printURLSpy).toHaveBeenCalledWith("http://127.0.0.1")
         })
 
-        it("should track all the arguments of its calls (printCallback)", function (
-      done
-    ) {
+        it("should track all the arguments of its calls (printCallback)", function (done) {
             const printCallback: PrintdCallback = (argObj) => {
                 printCallbackSpy(argObj)
 
@@ -90,17 +88,11 @@ describe("Printd test suite", () => {
         })
 
         it("should track all the arguments of its calls (beforeprint)", () => {
-            expect(window.addEventListener).toHaveBeenCalledWith(
-        "beforeprint",
-        onEvent
-      )
+            expect(window.addEventListener).toHaveBeenCalledWith("beforeprint", onEvent)
         })
 
         it("should track all the arguments of its calls (afterprint)", () => {
-            expect(window.addEventListener).toHaveBeenCalledWith(
-        "afterprint",
-        onEvent
-      )
+            expect(window.addEventListener).toHaveBeenCalledWith("afterprint", onEvent)
         })
 
         it("should contain the given arguments (`beforeprint` event)", () => {
