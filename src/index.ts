@@ -2,7 +2,7 @@ const URL_LONG = /^(((http[s]?)|file):)?(\/\/)+([0-9a-zA-Z-_.=?&].+)$/
 const URL_SHORT = /^((\.|\.\.)?\/)([0-9a-zA-Z-_.=?&]+\/)*([0-9a-zA-Z-_.=?&]+)$/
 const isValidURL = (str: string) => URL_LONG.test(str) || URL_SHORT.test(str)
 
-export function createStyle (doc: Document = window.document, cssText: string) {
+export function createStyle (doc: Document, cssText: string) {
     const style = doc.createElement("style")
     style.appendChild(doc.createTextNode(cssText))
     return style
@@ -10,25 +10,20 @@ export function createStyle (doc: Document = window.document, cssText: string) {
 
 export function createLinkStyle (doc: Document, url: string) {
     const style: HTMLLinkElement = doc.createElement("link")
-
     style.type = "text/css"
     style.rel = "stylesheet"
     style.href = url
-
     return style
 }
 
 export function createIFrame (parent: HTMLElement) {
     const el: HTMLIFrameElement = window.document.createElement("iframe")
-
     el.setAttribute("src", "about:blank")
     el.setAttribute("style", "visibility:hidden;width:0;height:0;position:absolute;z-index:-9999;bottom:0;")
     el.setAttribute("width", "0")
     el.setAttribute("height", "0")
     el.setAttribute("wmode", "opaque")
-
     parent.appendChild(el)
-
     return el
 }
 
@@ -146,13 +141,11 @@ export default class Printd {
             scripts.forEach((value) => {
                 if (value) {
                     const script = doc.createElement("script")
-
                     if (isValidURL(value)) {
                         script.src = value
                     } else {
                         script.innerText = value
                     }
-
                     doc.body.appendChild(script)
                 }
             })
@@ -178,7 +171,6 @@ export default class Printd {
 
     private launchPrint (contentWindow: Window) {
         const result = contentWindow.document.execCommand("print", false, undefined)
-
         if (!result) {
             contentWindow.print()
         }
@@ -199,7 +191,7 @@ export default class Printd {
 
             if (!contentDocument || !contentWindow) return
 
-            if (this.callback) {
+            if (typeof this.callback === "function") {
                 this.callback({
                     iframe: this.iframe,
                     element: this.elCopy,

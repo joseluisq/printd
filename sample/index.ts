@@ -14,16 +14,16 @@ const btn1 = document.getElementById("myButton1")
 const btn2 = document.getElementById("myButton2")
 
 const cssText = `
-  button {
-    background-color: #fff;
-    border: solid 2px peru;
-    border-radius: 5px;
-    color: peru;
-    font-size: 16pt;
-    font-weight: bold;
-    padding: 10px;
-    width: 200px;
-  }
+    button {
+        background-color: #fff;
+        border: solid 2px peru;
+        border-radius: 5px;
+        color: peru;
+        font-size: 16pt;
+        font-weight: bold;
+        padding: 10px;
+        width: 200px;
+    }
 `
 
 btn1.addEventListener("click", printElement)
