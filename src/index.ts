@@ -2,12 +2,9 @@ const URL_LONG = /^(((http[s]?)|file):)?(\/\/)+([0-9a-zA-Z-_.=?&].+)$/
 const URL_SHORT = /^((\.|\.\.)?\/)([0-9a-zA-Z-_.=?&]+\/)*([0-9a-zA-Z-_.=?&]+)$/
 const isValidURL = (str: string) => URL_LONG.test(str) || URL_SHORT.test(str)
 
-export function createStyle (doc: Document, cssText: string) {
-    const style: HTMLStyleElement = doc.createElement("style")
-
-    style.type = "text/css"
-    style.appendChild(window.document.createTextNode(cssText))
-
+export function createStyle (doc: Document = window.document, cssText: string) {
+    const style = doc.createElement("style")
+    style.appendChild(doc.createTextNode(cssText))
     return style
 }
 
