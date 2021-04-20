@@ -1,75 +1,75 @@
 {
-  "name": "printd",
-  "version": "1.4.2",
-  "description": "Print HTML elements in modern browsers.",
-  "repository": "joseluisq/printd",
-  "license": "MIT",
-  "author": {
-    "name": "José Luis Quintana",
-    "url": "http://git.io/joseluisq"
-  },
-  "keywords": [
-    "html",
-    "dom",
-    "print",
-    "elements",
-    "element printing"
-  ],
-  "engines": {
-    "node": ">= 4"
-  },
-  "main": "index.js",
-  "typings": "index.d.ts",
-  "files": [
-    "index.js",
-    "index.d.ts",
-    "/*.min.js",
-    "README.md",
-    "LICENSE.md"
-  ],
-  "bundlesize": [
-    {
-      "path": "./index.js",
-      "maxSize": "2KB"
+    "name": "printd",
+    "version": "1.4.2",
+    "description": "Print HTML elements in modern browsers.",
+    "repository": "joseluisq/printd",
+    "license": "MIT",
+    "author": {
+        "name": "Jose Quintana",
+        "url": "http://git.io/joseluisq"
     },
-    {
-      "path": "./*.min.js",
-      "maxSize": "2KB"
+    "keywords": [
+        "html",
+        "dom",
+        "print",
+        "elements",
+        "element printing"
+    ],
+    "engines": {
+        "node": ">= 4"
+    },
+    "main": "index.js",
+    "typings": "index.d.ts",
+    "files": [
+        "index.js",
+        "index.d.ts",
+        "/*.min.js",
+        "README.md",
+        "LICENSE.md"
+    ],
+    "bundlesize": [
+        {
+            "path": "./index.js",
+            "maxSize": "2KB"
+        },
+        {
+            "path": "./*.min.js",
+            "maxSize": "2KB"
+        }
+    ],
+    "scripts": {
+        "version": "npm run build",
+        "build": "npm run test && npm run compile",
+        "compile": "npm run compile:browser && npm run compile:cjs",
+        "compile:cjs": "tsc --module commonjs --target es5",
+        "compile:browser": "rollup -c",
+        "watch": "tsc --watch",
+        "clean": "rm -rf dist",
+        "test": "npm run lint && karma start --single-run --reporters spec",
+        "test:bundle": "yarn build && bundlesize",
+        "test:watch": "env NODE_ENV=debug karma start",
+        "lint": "tslint --format stylish --project tsconfig.json",
+        "sample": "parcel sample/index.html"
+    },
+    "devDependencies": {
+        "@types/jasmine": "3.6.9",
+        "@types/node": "14.14.41",
+        "bundlesize": "0.18.1",
+        "git-testing-hook": "0.3.0",
+        "jasmine-core": "3.7.1",
+        "jasmine-spec-reporter": "7.0.0",
+        "karma": "6.3.2",
+        "karma-chrome-launcher": "3.1.0",
+        "karma-jasmine": "4.0.1",
+        "karma-jasmine-html-reporter": "1.5.4",
+        "karma-spec-reporter": "0.0.32",
+        "karma-typescript": "5.5.1",
+        "parcel-bundler": "1.12.5",
+        "rollup": "2.45.2",
+        "rollup-plugin-terser": "7.0.2",
+        "rollup-plugin-typescript2": "0.30.0",
+        "tslint": "6.1.3",
+        "tslint-config-standard-plus": "^2.3.0",
+        "typescript": "4.2.4"
     }
-  ],
-  "scripts": {
-    "version": "npm run build",
-    "build": "npm run test && npm run clean && npm run compile",
-    "compile": "npm run compile:browser && npm run compile:cjs",
-    "compile:cjs": "tsc --module commonjs --target es5",
-    "compile:browser": "rollup -c",
-    "watch": "tsc --watch",
-    "clean": "rm -rf dist",
-    "test": "npm run lint && karma start --single-run --reporters spec",
-    "test:bundle": "yarn build && bundlesize",
-    "test:watch": "env NODE_ENV=debug karma start",
-    "lint": "tslint --format stylish --project tsconfig.json",
-    "sample": "parcel sample/index.html"
-  },
-  "devDependencies": {
-    "@types/jasmine": "3.3.16",
-    "@types/node": "8.10.48",
-    "bundlesize": "0.18.0",
-    "git-testing-hook": "0.3.0",
-    "jasmine-core": "3.4.0",
-    "jasmine-spec-reporter": "4.2.1",
-    "karma": "4.2.0",
-    "karma-chrome-launcher": "2.2.0",
-    "karma-jasmine": "2.0.1",
-    "karma-jasmine-html-reporter": "1.4.2",
-    "karma-spec-reporter": "0.0.32",
-    "karma-typescript": "4.1.1",
-    "parcel-bundler": "1.12.3",
-    "rollup": "0.68.2",
-    "rollup-plugin-terser": "5.1.1",
-    "rollup-plugin-typescript2": "0.21.2",
-    "tslint": "5.18.0",
-    "tslint-config-standard-plus": "^2.3.0",
-    "typescript": "2.9.2"
-  }
 }

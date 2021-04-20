@@ -1,3 +1,3 @@
 {
-  "extends": "tslint-config-standard-plus/tslint.legacy"
+    "extends": "tslint-config-standard-plus/tslint.legacy"
 }

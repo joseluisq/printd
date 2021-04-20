@@ -4,8 +4,8 @@ import { terser } from "rollup-plugin-terser";
 
 export default {
     input: 'src/index.ts',
-    name,
     output: {
+        name,
         file: `./${name}.umd.min.js`,
         format: 'umd',
         sourcemap: false,
