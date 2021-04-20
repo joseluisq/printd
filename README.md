@@ -15,8 +15,9 @@ Printd opens your [Browser Print Dialog](https://developer.mozilla.org/en-US/doc
 
 ## Demos
 
-- :rocket: [Live demo](https://codepen.io/joseluisq/full/VzRpGb/)
-- :books: [Demo source code](https://github.com/joseluisq/printd-vue-component-example)
+- 🚀 [Live Demo](https://codepen.io/joseluisq/full/VzRpGb/)
+- 📘 [Simple Code Example](./sample) - Clone this repository and just run `npm run sample`
+- 📗 [Vue Code example](https://github.com/joseluisq/printd-vue-component-example)
 
 ## Install
 
