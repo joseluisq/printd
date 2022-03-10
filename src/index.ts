@@ -170,8 +170,7 @@ export default class Printd {
     }
 
     private launchPrint (contentWindow: Window) {
-        const result = contentWindow.document.execCommand("print", false, undefined)
-        if (!result) {
+        if (!this.isLoading) {
             contentWindow.print()
         }
     }
