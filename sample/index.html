@@ -2,69 +2,76 @@
 <html>
 
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Printd example app</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Printd example app</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
 
-  <link id="myStyle" href="./style.css" rel="stylesheet" type="text/css">
+    <link id="myStyle" href="./style.css" rel="stylesheet" type="text/css">
 
-  <style>
-    button {
-      background-color: #fff;
-      border: solid 2px peru;
-      border-radius: 5px;
-      color: peru;
-      font-size: 16pt;
-      font-weight: bold;
-      padding: 10px;
-      width: 200px;
-    }
-  </style>
+    <style>
+        button {
+            background-color: #fff;
+            border: solid 2px peru;
+            border-radius: 5px;
+            color: peru;
+            font-size: 16pt;
+            font-weight: bold;
+            padding: 10px;
+            width: 200px;
+            cursor: pointer;
+        }
+        
+        button:hover {
+            border-color: #008b8b;
+            background-color: #add8e6;
+            color: #000;
+        }
+    </style>
 </head>
 
 <body>
-  <h1>This is a page title</h1>
+    <h1>This is a page title</h1>
 
-  <hr>
-
-  <div id="myContent" class="img">
-    <h2>This is a content title</h2>
-    <p>Printing some <em>images</em> 🖼!</p>
-
-    <div>
-      <p>
-        <img src="https://c2.staticflickr.com/6/5632/21825222520_432fd1b183_k.jpg" alt="" width="200" height="200"> <br>
-
-        <code>Image 1: 200px X 200px</code>
-      </p>
-
-      <p>
-        <img src="https://c1.staticflickr.com/1/742/20508368953_9f318453e6_k.jpg?v" alt="" width="300" height="250">
-        <br>
-
-        <code>Image 2: 300px X 250px</code>
-      </p>
-    </div>
-
-    <p>
-      <button id="myButton1">🖨 Print element</button>
-      <button id="myButton2">🖨 Print URL</button>
-    </p>
-
-    <a href="https://github.com/joseluisq/printd">Printd repo link...</a>
-  </div>
-
-  <footer>
     <hr>
 
-    <p>
-      <em>This is a footer page...</em>
-    </p>
-  </footer>
+    <div id="myContent" class="img">
+        <h2>This is a content title</h2>
+        <p>Printing some <em>images</em> 🖼!</p>
 
-  <script src="index.ts"></script>
+        <div>
+            <p>
+                <img src="https://c2.staticflickr.com/6/5632/21825222520_432fd1b183_k.jpg" alt="" width="200" height="200"> <br>
+
+                <code>Image 1: 200px X 200px</code>
+            </p>
+
+            <p>
+                <img src="https://c1.staticflickr.com/1/742/20508368953_9f318453e6_k.jpg?v" alt="" width="300" height="250">
+                <br>
+
+                <code>Image 2: 300px X 250px</code>
+            </p>
+        </div>
+
+        <p>
+            <button id="myButton1">🖨 Print element</button>
+            <button id="myButton2">🖨 Print URL</button>
+        </p>
+
+        <a href="https://github.com/joseluisq/printd">Printd repo link...</a>
+    </div>
+
+    <footer>
+        <hr>
+
+        <p>
+            <em>This is a footer page...</em>
+        </p>
+    </footer>
+
+    <script src="index.ts"></script>
 </body>
 
 </html>

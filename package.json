@@ -27,8 +27,7 @@
         "README.md",
         "LICENSE.md"
     ],
-    "bundlesize": [
-        {
+    "bundlesize": [{
             "path": "./index.js",
             "maxSize": "2KB"
         },
@@ -49,7 +48,8 @@
         "test:bundle": "yarn build && bundlesize",
         "test:watch": "env NODE_ENV=debug karma start",
         "lint": "tslint --format stylish --project tsconfig.json",
-        "sample": "parcel sample/index.html"
+        "sample": "parcel sample/index.html",
+        "sample-build": "parcel build sample/index.html && cp -r sample/base.css dist/"
     },
     "devDependencies": {
         "@types/jasmine": "3.6.9",
