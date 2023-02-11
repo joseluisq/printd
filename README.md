@@ -162,8 +162,11 @@ However note that they *only* work when printing custom HTML elements via the `p
 
 ```ts
 const d = new Printd()
+
 d.onBeforePrint((event) => console.log(event, "called before printing!"))
 d.onAfterPrint((event) => console.log(event, "called after printing!"))
+
+d.print(document.getElementById('myelement'))
 ```
 
 ### getIFrame
