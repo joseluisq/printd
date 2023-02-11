@@ -62,6 +62,8 @@ export default class Printd {
     private isLoading = false
     private hasEvents = false
     private callback?: PrintdCallback
+    private onbeforeprint?: (event: Event) => void
+    private onafterprint?: (event: Event) => void
     private elCopy?: HTMLElement
 
     constructor (options?: PrintdOptions) {
@@ -169,6 +171,26 @@ export default class Printd {
         this.iframe.src = url
     }
 
+    /**
+     * Add a browser `beforeprint` print event listener providing a custom callback.
+     *
+     * Note that it only works when printing custom HTML elements.
+     *
+     */
+    onBeforePrint (callback: (event: Event) => void) {
+        this.onbeforeprint = callback
+    }
+
+    /**
+     * Add a browser `afterprint` print event listener providing a custom callback.
+     *
+     * Note that it only works when printing custom HTML elements.
+     *
+     */
+    onAfterPrint (callback: (event: Event) => void) {
+        this.onafterprint = callback
+    }
+
     private launchPrint (contentWindow: Window) {
         if (!this.isLoading) {
             contentWindow.print()
@@ -179,6 +201,16 @@ export default class Printd {
         if (!this.hasEvents) {
             this.hasEvents = true
             this.iframe.addEventListener("load", () => this.onLoad(), false)
+
+            const { contentWindow } = this.iframe
+            if (contentWindow) {
+                if (this.onbeforeprint) {
+                    contentWindow.addEventListener("beforeprint", this.onbeforeprint)
+                }
+                if (this.onafterprint) {
+                    contentWindow.addEventListener("afterprint", this.onafterprint)
+                }
+            }
         }
     }
 
