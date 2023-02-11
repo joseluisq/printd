@@ -9,6 +9,10 @@ const d = new Printd({
     headElements: [ base ]
 })
 
+// Define some print events
+d.onBeforePrint(() => console.log("before print event!"))
+d.onAfterPrint(() => console.log("after print event!"))
+
 const content = document.getElementById("myContent")
 const btn1 = document.getElementById("myButton1")
 const btn2 = document.getElementById("myButton2")
@@ -39,8 +43,7 @@ function printElement () {
 
         // fire printing!
         launchPrint()
-    }
-  )
+    })
 }
 
 function printURL () {

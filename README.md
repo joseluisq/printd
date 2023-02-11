@@ -155,6 +155,17 @@ d.printURL('http://127.0.0.1/', ({ launchPrint }) => {
 })
 ```
 
+### Built-in print events
+
+Printd provides convenient print event methods on top of the Browser `beforeprint` and `afterprint` events.
+However note that they *only* work when printing custom HTML elements via the `print()` method.
+
+```ts
+const d = new Printd()
+d.onBeforePrint((event) => console.log(event, "called before printing!"))
+d.onAfterPrint((event) => console.log(event, "called after printing!"))
+```
+
 ### getIFrame
 
 Gets the current `HTMLIFrameElement` reference.
@@ -232,4 +243,4 @@ Feel free to send some [Pull request](https://github.com/joseluisq/printd/pulls)
 ## License
 MIT license
 
-© 2017-present [José Quintana](https://git.io/joseluisq)
+© 2017-present [Jose Quintana](https://github.com/joseluisq)

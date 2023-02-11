@@ -71,7 +71,7 @@ describe("Printd test suite", () => {
         })
     })
 
-    describe("events", () => {
+    describe("browser events", () => {
         let printd: Printd
         let window: Window
         let spy: jasmine.Spy
@@ -106,6 +106,54 @@ describe("Printd test suite", () => {
             const [ type, args ] = spy.calls.argsFor(1)
 
             expect(type).toBe("afterprint")
+            expect(args).toEqual(onEvent)
+        })
+    })
+
+    describe("custom onBeforePrint event", () => {
+        let printd: Printd
+        let spy: jasmine.Spy
+
+        const onEvent = () => true
+
+        beforeEach(() => {
+            printd = new Printd()
+
+            spy = spyOn(printd, "onBeforePrint")
+            printd.onBeforePrint(onEvent)
+        })
+
+        it("should track all the arguments of its calls (onBeforePrint)", () => {
+            expect(printd.onBeforePrint).toHaveBeenCalledWith(onEvent)
+        })
+
+        it("should contain the given arguments (`onBeforePrint` event)", () => {
+            const [ args ] = spy.calls.argsFor(0)
+
+            expect(args).toEqual(onEvent)
+        })
+    })
+
+    describe("custom onAfterPrint event", () => {
+        let printd: Printd
+        let spy: jasmine.Spy
+
+        const onEvent = () => true
+
+        beforeEach(() => {
+            printd = new Printd()
+
+            spy = spyOn(printd, "onAfterPrint")
+            printd.onAfterPrint(onEvent)
+        })
+
+        it("should track all the arguments of its calls (onAfterPrint)", () => {
+            expect(printd.onAfterPrint).toHaveBeenCalledWith(onEvent)
+        })
+
+        it("should contain the given arguments (`onAfterPrint` event)", () => {
+            const [ args ] = spy.calls.argsFor(0)
+
             expect(args).toEqual(onEvent)
         })
     })
